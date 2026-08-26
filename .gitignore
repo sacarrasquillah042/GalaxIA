@@ -1,0 +1,10 @@
+.venv/
+__pycache__/
+*.pyc
+data/raw/
+data/processed/*.npy
+data/processed/*.npz
+models/*.keras
+models/*.pkl
+.ipynb_checkpoints/
+!data/processed/splits.json

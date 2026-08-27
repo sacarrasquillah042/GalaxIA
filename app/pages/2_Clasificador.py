@@ -48,7 +48,7 @@ def cache_imagenes():
     return imgs, {int(g): i for i, g in enumerate(ids)}
 
 
-st.title("🔭 Clasificador")
+st.title("Clasificador")
 
 M = muestra()
 modelo, nombre_modelo = cnn()
@@ -75,7 +75,7 @@ with col_izq:
     if origen == "Galaxia del conjunto de prueba":
         if "idx" not in st.session_state:
             st.session_state.idx = int(np.random.randint(len(M["ids"])))
-        if st.button("🎲 Otra galaxia al azar", use_container_width=True):
+        if st.button("Otra galaxia al azar", use_container_width=True):
             st.session_state.idx = int(np.random.randint(len(M["ids"])))
         i = st.session_state.idx
         img = M["X"][i]

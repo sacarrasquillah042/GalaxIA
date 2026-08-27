@@ -1,0 +1,224 @@
+{
+  "Smooth": [
+    {
+      "galaxy_id": 281652,
+      "archivo": "Smooth/281652.jpg",
+      "confianza": 1.0,
+      "edge_on": false
+    },
+    {
+      "galaxy_id": 340504,
+      "archivo": "Smooth/340504.jpg",
+      "confianza": 1.0,
+      "edge_on": false
+    },
+    {
+      "galaxy_id": 280408,
+      "archivo": "Smooth/280408.jpg",
+      "confianza": 1.0,
+      "edge_on": false
+    },
+    {
+      "galaxy_id": 358458,
+      "archivo": "Smooth/358458.jpg",
+      "confianza": 1.0,
+      "edge_on": false
+    },
+    {
+      "galaxy_id": 262140,
+      "archivo": "Smooth/262140.jpg",
+      "confianza": 1.0,
+      "edge_on": false
+    },
+    {
+      "galaxy_id": 335161,
+      "archivo": "Smooth/335161.jpg",
+      "confianza": 1.0,
+      "edge_on": false
+    },
+    {
+      "galaxy_id": 204609,
+      "archivo": "Smooth/204609.jpg",
+      "confianza": 1.0,
+      "edge_on": false
+    },
+    {
+      "galaxy_id": 232957,
+      "archivo": "Smooth/232957.jpg",
+      "confianza": 1.0,
+      "edge_on": false
+    },
+    {
+      "galaxy_id": 156209,
+      "archivo": "Smooth/156209.jpg",
+      "confianza": 1.0,
+      "edge_on": false
+    },
+    {
+      "galaxy_id": 270766,
+      "archivo": "Smooth/270766.jpg",
+      "confianza": 1.0,
+      "edge_on": false
+    },
+    {
+      "galaxy_id": 187245,
+      "archivo": "Smooth/187245.jpg",
+      "confianza": 1.0,
+      "edge_on": false
+    },
+    {
+      "galaxy_id": 154900,
+      "archivo": "Smooth/154900.jpg",
+      "confianza": 1.0,
+      "edge_on": false
+    }
+  ],
+  "Disk": [
+    {
+      "galaxy_id": 317340,
+      "archivo": "Disk/317340.jpg",
+      "confianza": 0.98,
+      "edge_on": true
+    },
+    {
+      "galaxy_id": 691597,
+      "archivo": "Disk/691597.jpg",
+      "confianza": 0.974,
+      "edge_on": true
+    },
+    {
+      "galaxy_id": 274398,
+      "archivo": "Disk/274398.jpg",
+      "confianza": 0.98,
+      "edge_on": true
+    },
+    {
+      "galaxy_id": 594317,
+      "archivo": "Disk/594317.jpg",
+      "confianza": 0.973,
+      "edge_on": true
+    },
+    {
+      "galaxy_id": 247390,
+      "archivo": "Disk/247390.jpg",
+      "confianza": 0.981,
+      "edge_on": true
+    },
+    {
+      "galaxy_id": 663584,
+      "archivo": "Disk/663584.jpg",
+      "confianza": 0.975,
+      "edge_on": true
+    },
+    {
+      "galaxy_id": 445400,
+      "archivo": "Disk/445400.jpg",
+      "confianza": 0.988,
+      "edge_on": true
+    },
+    {
+      "galaxy_id": 433863,
+      "archivo": "Disk/433863.jpg",
+      "confianza": 0.984,
+      "edge_on": true
+    },
+    {
+      "galaxy_id": 629835,
+      "archivo": "Disk/629835.jpg",
+      "confianza": 1.0,
+      "edge_on": true
+    },
+    {
+      "galaxy_id": 833639,
+      "archivo": "Disk/833639.jpg",
+      "confianza": 0.98,
+      "edge_on": true
+    },
+    {
+      "galaxy_id": 358859,
+      "archivo": "Disk/358859.jpg",
+      "confianza": 0.994,
+      "edge_on": true
+    },
+    {
+      "galaxy_id": 999289,
+      "archivo": "Disk/999289.jpg",
+      "confianza": 1.0,
+      "edge_on": true
+    }
+  ],
+  "Spiral": [
+    {
+      "galaxy_id": 229602,
+      "archivo": "Spiral/229602.jpg",
+      "confianza": 1.0,
+      "edge_on": false
+    },
+    {
+      "galaxy_id": 307122,
+      "archivo": "Spiral/307122.jpg",
+      "confianza": 1.0,
+      "edge_on": false
+    },
+    {
+      "galaxy_id": 226030,
+      "archivo": "Spiral/226030.jpg",
+      "confianza": 1.0,
+      "edge_on": false
+    },
+    {
+      "galaxy_id": 319856,
+      "archivo": "Spiral/319856.jpg",
+      "confianza": 1.0,
+      "edge_on": false
+    },
+    {
+      "galaxy_id": 214833,
+      "archivo": "Spiral/214833.jpg",
+      "confianza": 1.0,
+      "edge_on": false
+    },
+    {
+      "galaxy_id": 301346,
+      "archivo": "Spiral/301346.jpg",
+      "confianza": 1.0,
+      "edge_on": false
+    },
+    {
+      "galaxy_id": 141605,
+      "archivo": "Spiral/141605.jpg",
+      "confianza": 1.0,
+      "edge_on": false
+    },
+    {
+      "galaxy_id": 185561,
+      "archivo": "Spiral/185561.jpg",
+      "confianza": 1.0,
+      "edge_on": false
+    },
+    {
+      "galaxy_id": 121394,
+      "archivo": "Spiral/121394.jpg",
+      "confianza": 1.0,
+      "edge_on": false
+    },
+    {
+      "galaxy_id": 222957,
+      "archivo": "Spiral/222957.jpg",
+      "confianza": 1.0,
+      "edge_on": false
+    },
+    {
+      "galaxy_id": 133435,
+      "archivo": "Spiral/133435.jpg",
+      "confianza": 1.0,
+      "edge_on": false
+    },
+    {
+      "galaxy_id": 111514,
+      "archivo": "Spiral/111514.jpg",
+      "confianza": 1.0,
+      "edge_on": false
+    }
+  ]
+}

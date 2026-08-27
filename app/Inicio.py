@@ -70,12 +70,12 @@ def cargar_knn():
 
 
 # --------------------------------------------------------------------------- #
-st.title("🌌 GalaxIA")
+st.title("GalaxIA")
 st.markdown("### Clasificación galáctica mediante inteligencia artificial")
 
 st.markdown("""
-Universidad Distrital Francisco José de Caldas
-**Camila Pérez Angulo** · **Sergio Andrés Carrasquilla Hernández**
+Universidad Distrital Francisco José de Caldas\n
+**Camila Pérez Angulo** · **Sergio Andrés Carrasquilla Hernández**\n
 IX Congreso Colombiano de Astronomía y Astrofísica — COCOA 2026
 """)
 
@@ -121,6 +121,6 @@ with col2:
         st.info("Faltan las métricas. Ejecutar `scripts/export_artefactos.py`.")
 
 st.divider()
-st.caption("Datos: Galaxy Zoo 2 / Galaxy Zoo Challenge (61 578 galaxias del SDSS). "
-           "Las imágenes son composiciones de las bandas g, r, i con estiramiento "
+st.caption("Datos: Galaxy Zoo 2 / Galaxy Zoo Challenge (61 578 galaxias del SDSS)."
+           "Las imágenes son composiciones de las bandas g, r, i con estiramiento" 
            "asinh, no fotometría calibrada.")

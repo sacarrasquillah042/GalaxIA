@@ -20,7 +20,7 @@ def metricas():
 
 
 M = metricas()
-st.title("📊 Resultados")
+st.title("Resultados")
 
 if not M:
     st.error("Falta `reports/metrics.json`.")

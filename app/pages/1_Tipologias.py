@@ -25,7 +25,7 @@ def galeria():
 C = contenido()
 G = galeria()
 
-st.title("🌀 Tipologías morfológicas")
+st.title("Tipologías morfológicas")
 st.markdown(
     "La morfología de una galaxia no es un rasgo estético: refleja su historia "
     "de formación, su contenido de gas y su dinámica interna. La secuencia de "
@@ -76,8 +76,7 @@ with tab1:
     entradas = G.get(elegida, [])
     if not entradas:
         st.warning(
-            "No hay galería para esta clase. Ejecutar "
-            "`python scripts/export_artefactos.py`."
+            "No hay galería para esta clase."
         )
     else:
         st.caption(

@@ -63,8 +63,7 @@ def main() -> int:
         tf.matmul(a, a).numpy()          # descarta la primera (incluye warm-up)
         t0 = time.time()
         for _ in range(10):
-            r = tf.matmul(a, a)
-        r.numpy()
+            tf.matmul(a, a)
         dt = (time.time() - t0) / 10
         tflops = 2 * 4096 ** 3 / dt / 1e12
         print(f"matmul 4096x4096: {dt*1000:.1f} ms  (~{tflops:.1f} TFLOPS fp32)")

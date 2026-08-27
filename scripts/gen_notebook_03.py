@@ -1,0 +1,210 @@
+#!/usr/bin/env python3
+"""Genera notebooks/03_dia3_comparacion.ipynb"""
+import json
+from pathlib import Path
+
+md = lambda s: {"cell_type": "markdown", "metadata": {}, "source": s.strip().split("\n")}
+code = lambda s: {"cell_type": "code", "execution_count": None, "metadata": {},
+                  "outputs": [], "source": s.strip().split("\n")}
+
+cells = [
+md("""
+# GalaxIA — Día 3: comparación rigurosa e interpretabilidad
+
+El resumen afirma que las redes neuronales *"alcanzaron niveles superiores"*.
+Dos números distintos no bastan para sostener eso: hace falta una prueba
+estadística. Aquí se cierra ese punto y se genera el material visual.
+
+Resultados del día 2 (F1-macro): CNN 0.9456 · MLP-PCA 0.8535 ·
+MLP-Params 0.8515 · MLP-Fusion 0.8509 · SVM 0.8357 · KNN 0.7909.
+"""),
+
+code("""
+import os
+os.environ.setdefault("TF_CPP_MIN_LOG_LEVEL", "2")
+import sys, json
+from pathlib import Path
+sys.path.insert(0, str(Path.cwd().parent / "src"))
+
+import numpy as np, pandas as pd, matplotlib.pyplot as plt
+from galaxia import data, labels, evaluate, explain
+data.fijar_semillas(42)
+
+display(evaluate.tabla_comparativa())
+"""),
+
+md("""
+## 1. ¿Las diferencias son reales? Prueba de McNemar
+
+McNemar compara dos modelos sobre **las mismas** muestras: cuenta en cuántos
+casos uno acierta y el otro falla. Es la prueba adecuada cuando ambos modelos se
+evalúan sobre el mismo conjunto de prueba.
+"""),
+
+code("""
+preds = {}
+for f in sorted(evaluate.DIR_REP.glob("pred_*.npz")):
+    z = np.load(f)
+    preds[f.stem.replace("pred_", "")] = {"y": z["y_true"], "p": z["y_pred"]}
+print("Predicciones guardadas:", list(preds))
+"""),
+
+code("""
+# Comparaciones que importan para la ponencia
+pares = [
+    ("cnn_128px", "mlp_pca",     "CNN vs MLP-PCA"),
+    ("cnn_128px", "mlp_params",  "CNN vs MLP-Params"),
+    ("mlp_pca",   "mlp_params",  "MLP-PCA vs MLP-Params"),
+    ("mlp_fusion","mlp_pca",     "Fusión vs solo PCA"),
+    ("mlp_pca",   "knn",         "MLP-PCA vs KNN"),
+]
+
+filas = []
+for a, b, etiqueta in pares:
+    if a not in preds or b not in preds:
+        print(f"(falta {a} o {b})"); continue
+    r = evaluate.mcnemar_modelos(preds[a]["y"], preds[a]["p"], preds[b]["p"], a, b)
+    filas.append({"Comparación": etiqueta,
+                  "solo A acierta": r["tabla"][0][1],
+                  "solo B acierta": r["tabla"][1][0],
+                  "chi2": round(r["statistic"], 2),
+                  "p-valor": r["pvalue"],
+                  "¿significativo?": "sí" if r["significativo_0.05"] else "no"})
+
+tab_mc = pd.DataFrame(filas)
+display(tab_mc.style.format({"p-valor": "{:.2e}"}))
+json.dump(filas, open(evaluate.DIR_REP / "mcnemar.json", "w"), indent=2, default=str)
+"""),
+
+md("""
+**Cómo leerlo.** Si `p < 0.05`, la diferencia no se explica por azar. Si
+`MLP-PCA vs MLP-Params` sale **no significativo**, ese es el resultado más
+interesante del trabajo: 24 parámetros interpretables igualan a cientos de
+componentes principales opacas. Y si `Fusión vs solo PCA` tampoco es
+significativo, confirma que ambas representaciones codifican lo mismo.
+"""),
+
+md("""
+## 2. Interpretabilidad de la CNN — Grad-CAM
+
+Un F1-macro de 0.95 no prueba por sí solo que la red aprendió morfología: podría
+estar explotando un artefacto del conjunto de datos. Grad-CAM lo verifica.
+"""),
+
+code("""
+import keras
+ruta_cnn = data.RAIZ / "models" / "cnn_128.keras"
+cnn = keras.models.load_model(ruta_cnn)
+
+df = labels.construir_etiquetas(data.cargar_csv())
+p = data.DIR_PROC / "umbral.json"
+UMBRAL = json.loads(p.read_text())["umbral"] if p.exists() else 0.6
+df_clean = labels.filtrar_por_confianza(df, umbral=UMBRAL)
+d = data.preparar_conjunto(df_clean, size=128)
+clases = d["clases"]
+Xte = np.array(d["test"]["X"]); yte = d["test"]["y"]
+print(clases, Xte.shape)
+"""),
+
+code("""
+fig = explain.rejilla_gradcam(cnn, Xte, yte, clases, n_por_clase=3,
+                              ruta_salida=str(evaluate.DIR_FIG / "gradcam.png"))
+plt.show()
+"""),
+
+md("""
+**Qué buscar.** Las zonas cálidas deben caer sobre el bulbo y los brazos. Si
+aparecen en las esquinas o en el fondo, la red está usando algo que no es
+morfología y hay que decirlo. Es una comprobación de honestidad científica, no
+un adorno.
+"""),
+
+md("""
+## 3. Análisis de errores
+
+La figura más importante de la ponencia: exactitud frente al consenso humano.
+"""),
+
+code("""
+conf_test = d["test"]["confianza"]
+pred_cnn = preds["cnn_128px"]["p"] if "cnn_128px" in preds else None
+
+if pred_cnn is not None:
+    r = evaluate.accuracy_vs_confianza(yte, pred_cnn, conf_test, bins=10, nombre="CNN")
+    fig, ax = plt.subplots(figsize=(7, 4.5))
+    ax.plot(r["centros"], r["accuracy"], "o-", lw=2)
+    for x, y, n in zip(r["centros"], r["accuracy"], r["n"]):
+        ax.annotate(f"n={n}", (x, y), fontsize=7, xytext=(0, 6),
+                    textcoords="offset points", ha="center")
+    ax.set_xlabel("Confianza del voto de los voluntarios")
+    ax.set_ylabel("Exactitud de la CNN"); ax.grid(alpha=.3)
+    ax.set_title("El modelo falla donde los humanos también dudaron")
+    plt.tight_layout(); plt.savefig(evaluate.DIR_FIG / "conf_vs_acc.png", dpi=150)
+    plt.show()
+"""),
+
+code("""
+# Galería de errores: dónde se confunde exactamente
+errores = np.where(pred_cnn != yte)[0]
+print(f"{len(errores)} errores de {len(yte)} ({len(errores)/len(yte)*100:.1f} %)")
+
+from collections import Counter
+conf_pares = Counter((clases[yte[i]], clases[pred_cnn[i]]) for i in errores)
+for (real, pred), n in conf_pares.most_common():
+    print(f"  {real:8s} -> {pred:8s} : {n}")
+"""),
+
+code("""
+# Los errores más "seguros": donde el modelo se equivocó con alta confianza
+z = np.load(evaluate.DIR_REP / "pred_cnn_128px.npz")
+proba = z["proba"]
+seguridad = proba.max(1)
+peores = errores[np.argsort(-seguridad[errores])][:10]
+
+fig, axes = plt.subplots(2, 5, figsize=(14, 6))
+for a, i in zip(axes.ravel(), peores):
+    a.imshow(Xte[i]); a.axis("off")
+    a.set_title(f"real {clases[yte[i]]}\\npred {clases[pred_cnn[i]]} "
+                f"({seguridad[i]:.2f})", fontsize=8)
+fig.suptitle("Errores con alta confianza del modelo")
+plt.tight_layout(); plt.savefig(evaluate.DIR_FIG / "errores.png", dpi=140); plt.show()
+"""),
+
+md("""
+Revisen estas diez a ojo. En muchos casos van a encontrar que la etiqueta de
+Galaxy Zoo es discutible y el modelo no está tan equivocado. Eso es material
+directo para la discusión de la ponencia.
+"""),
+
+md("""
+## 4. Exportar artefactos para la interfaz
+
+Desde terminal:
+
+```bash
+python scripts/export_artefactos.py
+streamlit run app/Inicio.py
+```
+"""),
+
+md("""
+## 5. Cierre del día 3
+
+- [ ] `mcnemar.json` generado y revisado
+- [ ] Grad-CAM verificado: la red mira la galaxia, no el fondo
+- [ ] Figura exactitud vs. consenso humano
+- [ ] Galería de errores revisada a ojo
+- [ ] `export_artefactos.py` ejecutado
+- [ ] App arrancando sin errores
+""")
+]
+
+nb = {"cells": cells,
+      "metadata": {"kernelspec": {"display_name": "GalaxIA", "language": "python",
+                                  "name": "galaxia"},
+                   "language_info": {"name": "python", "version": "3.12"}},
+      "nbformat": 4, "nbformat_minor": 5}
+
+out = Path(__file__).resolve().parents[1] / "notebooks" / "03_dia3_comparacion.ipynb"
+out.write_text(json.dumps(nb, indent=1, ensure_ascii=False))
+print("Escrito:", out)

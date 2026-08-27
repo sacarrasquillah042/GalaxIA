@@ -1,0 +1,97 @@
+{
+  "_nota": "Contenido educativo de la interfaz. Los rangos son valores típicos de la literatura (Hubble 1936; Roberts & Haynes 1994; Blanton & Moustakas 2009; Willett et al. 2013) y deben leerse como órdenes de magnitud, no como cortes estrictos: la secuencia de Hubble es continua.",
+
+  "clases_modelo": {
+    "Smooth": {
+      "nombre": "Lisa (elíptica)",
+      "hubble": "E0 – E7",
+      "resumen": "Galaxias sin estructura interna visible: un elipsoide de brillo suave que decae de forma continua desde el centro. Corresponden a las elípticas de la secuencia de Hubble y a las lenticulares vistas de frente.",
+      "caracteristicas": {
+        "Población estelar": "Dominada por estrellas viejas (Población II), de baja masa y color rojo. Edades típicas superiores a 8 mil millones de años.",
+        "Gas y polvo": "Muy escasos. El medio interestelar está en su mayoría en fase caliente (rayos X), no en nubes moleculares frías.",
+        "Formación estelar": "Prácticamente detenida. Tasas por debajo de 0.1 masas solares por año en las más masivas.",
+        "Color típico": "g − r ≈ 0.75 – 0.95 (extremo rojo de la secuencia)",
+        "Masa estelar": "10⁸ – 10¹³ masas solares. Incluye los objetos más masivos del universo local.",
+        "Cinemática": "Soportadas por dispersión de velocidades: las estrellas siguen órbitas desordenadas. La rotación global es pequeña.",
+        "Perfil de brillo": "Ley de de Vaucouleurs (R^1/4), muy concentrada.",
+        "Índice de concentración": "C = r90/r50 ≈ 2.8 – 3.5, el más alto de todos los tipos."
+      },
+      "clave_visual": "Brillo que decae suavemente sin rasgos abruptos. Sin brazos, sin banda de polvo, sin bordes definidos.",
+      "por_que_se_clasifica_bien": "Su alta concentración y su color rojo son las dos señales más separables del problema. Es la clase con mejor desempeño en todos los modelos."
+    },
+
+    "Disk": {
+      "nombre": "Disco",
+      "hubble": "S0 / discos de canto",
+      "resumen": "Galaxias con un disco identificable pero sin patrón espiral visible. Reúne dos poblaciones: discos vistos de canto, donde la geometría impide ver los brazos, y discos de frente sin estructura espiral apreciable (lenticulares).",
+      "caracteristicas": {
+        "Población estelar": "Mezcla de un bulbo viejo y rojo con un disco de población intermedia. En las lenticulares el disco también es viejo.",
+        "Gas y polvo": "Variable. Los discos de canto muestran a menudo una banda de polvo oscura que cruza el plano medio; las lenticulares suelen estar empobrecidas en gas.",
+        "Formación estelar": "Baja a moderada. Las lenticulares se consideran discos que agotaron o perdieron su gas.",
+        "Color típico": "g − r ≈ 0.6 – 0.85",
+        "Masa estelar": "10⁹ – 10¹¹ masas solares",
+        "Cinemática": "Soportadas por rotación: el disco gira de forma ordenada con curvas de rotación planas.",
+        "Perfil de brillo": "Disco exponencial más un bulbo central de tipo de Vaucouleurs.",
+        "Índice de concentración": "C ≈ 2.3 – 3.0, intermedio."
+      },
+      "clave_visual": "Forma alargada y elipticidad alta en los objetos de canto, frecuentemente con banda de polvo. En los de frente, un disco liso con bulbo pero sin brazos.",
+      "por_que_es_dificil": "Es una clase heterogénea por construcción: reúne dos configuraciones que se parecen poco entre sí. Además, un disco de canto con brazos es indistinguible de uno sin ellos, porque la geometría los oculta. Es la frontera donde también dudan los voluntarios humanos."
+    },
+
+    "Spiral": {
+      "nombre": "Espiral",
+      "hubble": "Sa – Sc / SBa – SBc",
+      "resumen": "Discos vistos con inclinación suficiente para distinguir brazos espirales. La subsecuencia Sa→Sc va de bulbo prominente y brazos cerrados a bulbo pequeño y brazos abiertos y fragmentados.",
+      "caracteristicas": {
+        "Población estelar": "Bulbo viejo y rojo; disco con población joven concentrada en los brazos, donde se forman estrellas masivas y azules de tipo O y B.",
+        "Gas y polvo": "Abundantes. El gas molecular se concentra en los brazos, que actúan como ondas de densidad que comprimen el material.",
+        "Formación estelar": "Activa. Entre 0.5 y 20 masas solares por año, creciendo hacia los tipos tardíos (Sc).",
+        "Color típico": "g − r ≈ 0.35 – 0.65 (nube azul)",
+        "Masa estelar": "10⁹ – 10¹¹·⁵ masas solares",
+        "Cinemática": "Rotación ordenada. La discrepancia entre la curva de rotación observada y la masa luminosa es la evidencia clásica de materia oscura.",
+        "Perfil de brillo": "Disco exponencial dominante; bulbo cada vez menor hacia Sc.",
+        "Índice de concentración": "C ≈ 2.0 – 2.8, el más bajo."
+      },
+      "clave_visual": "Brazos que nacen del centro o de una barra y se enrollan hacia afuera, más azules y grumosos que el resto del disco.",
+      "barras": "Cerca de dos tercios de las espirales del universo local presentan una barra central. La barra redistribuye momento angular y canaliza gas hacia el núcleo, alimentando formación estelar central y, en algunos casos, el agujero negro supermasivo."
+    },
+
+    "Star/Artifact": {
+      "nombre": "Estrella o artefacto",
+      "hubble": "—",
+      "resumen": "Fuentes puntuales (estrellas de nuestra propia galaxia) y defectos de imagen: rayos cósmicos, columnas de saturación, reflejos internos del telescopio.",
+      "caracteristicas": {
+        "Naturaleza": "No son galaxias. Se incluyen en el árbol de Galaxy Zoo para que los voluntarios puedan descartarlas explícitamente.",
+        "Apariencia": "Perfil idéntico a la función de dispersión puntual (PSF) del instrumento, o geometría claramente artificial (líneas rectas, picos de difracción).",
+        "Frecuencia": "Muy baja en este conjunto: 59 objetos de 61 578 (0.10 %)."
+      },
+      "nota_metodologica": "Con solo 59 ejemplos, esta clase no es evaluable de forma fiable dentro del problema multiclase: sus curvas ROC se calcularían sobre un puñado de objetos en el conjunto de prueba. Por eso se excluye del resultado principal y se trata, si acaso, como una tarea binaria de detección con métricas apropiadas al desbalance."
+    }
+  },
+
+  "secuencia_hubble": [
+    {"tipo": "E0", "familia": "Elíptica", "desc": "Prácticamente circular en proyección."},
+    {"tipo": "E7", "familia": "Elíptica", "desc": "Marcadamente alargada. El número indica 10·(1 − b/a)."},
+    {"tipo": "S0", "familia": "Lenticular", "desc": "Disco y bulbo, sin brazos. Puente entre elípticas y espirales."},
+    {"tipo": "Sa", "familia": "Espiral", "desc": "Bulbo grande, brazos apretados y suaves."},
+    {"tipo": "Sb", "familia": "Espiral", "desc": "Bulbo intermedio, brazos bien definidos."},
+    {"tipo": "Sc", "familia": "Espiral", "desc": "Bulbo pequeño, brazos abiertos y grumosos."},
+    {"tipo": "SBa", "familia": "Espiral barrada", "desc": "Como Sa, con barra central."},
+    {"tipo": "SBb", "familia": "Espiral barrada", "desc": "Como Sb, con barra central."},
+    {"tipo": "SBc", "familia": "Espiral barrada", "desc": "Como Sc, con barra central."},
+    {"tipo": "Irr", "familia": "Irregular", "desc": "Sin simetría. Baja masa, rica en gas, formación estelar intensa."}
+  ],
+
+  "arbol_gz2": {
+    "descripcion": "El cuestionario de Galaxy Zoo 2 es un árbol de decisión: cada pregunta se formula solo si la respuesta anterior lo justifica. Por eso las 37 respuestas no son independientes, y la probabilidad de una hoja es el producto de las probabilidades condicionadas a lo largo de la rama.",
+    "preguntas_usadas": [
+      {"id": "Q1", "texto": "¿Es lisa y redondeada, tiene alguna estructura o es una estrella/artefacto?",
+       "respuestas": ["Lisa", "Con estructura o disco", "Estrella o artefacto"]},
+      {"id": "Q2", "texto": "¿Podría ser un disco visto de canto?",
+       "respuestas": ["Sí", "No"], "condicion": "Solo si Q1 = con estructura"},
+      {"id": "Q4", "texto": "¿Hay señales de un patrón espiral?",
+       "respuestas": ["Sí", "No"], "condicion": "Solo si Q2 = no de canto"}
+    ],
+    "advertencia": "Q4 nunca se formula a los discos vistos de canto: el flujo salta a la pregunta sobre la forma del bulbo. Ignorar esa condición hace que las galaxias de canto queden con probabilidad cercana a cero en Q4 y desaparezcan del conjunto de entrenamiento."
+  }
+}

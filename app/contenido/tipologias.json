@@ -1,97 +1,456 @@
 {
-  "_nota": "Contenido educativo de la interfaz. Los rangos son valores típicos de la literatura (Hubble 1936; Roberts & Haynes 1994; Blanton & Moustakas 2009; Willett et al. 2013) y deben leerse como órdenes de magnitud, no como cortes estrictos: la secuencia de Hubble es continua.",
+  "_nota": "Contenido educativo de GalaxIA. Rangos típicos de la literatura (Hubble 1926, 1936; de Vaucouleurs 1959; Sandage 1961; Roberts & Haynes 1994; Conselice 2003; Blanton & Moustakas 2009; Willett et al. 2013). Son órdenes de magnitud: la secuencia de Hubble es continua, no un conjunto de cajas discretas.",
 
   "clases_modelo": {
     "Smooth": {
       "nombre": "Lisa (elíptica)",
       "hubble": "E0 – E7",
-      "resumen": "Galaxias sin estructura interna visible: un elipsoide de brillo suave que decae de forma continua desde el centro. Corresponden a las elípticas de la secuencia de Hubble y a las lenticulares vistas de frente.",
+      "svg": "eliptica",
+      "resumen": "Galaxias sin estructura interna visible: un elipsoide cuyo brillo decae de forma continua desde el centro. Corresponden a las elípticas de la secuencia de Hubble y a las lenticulares vistas de frente.",
       "caracteristicas": {
-        "Población estelar": "Dominada por estrellas viejas (Población II), de baja masa y color rojo. Edades típicas superiores a 8 mil millones de años.",
-        "Gas y polvo": "Muy escasos. El medio interestelar está en su mayoría en fase caliente (rayos X), no en nubes moleculares frías.",
-        "Formación estelar": "Prácticamente detenida. Tasas por debajo de 0.1 masas solares por año en las más masivas.",
-        "Color típico": "g − r ≈ 0.75 – 0.95 (extremo rojo de la secuencia)",
-        "Masa estelar": "10⁸ – 10¹³ masas solares. Incluye los objetos más masivos del universo local.",
-        "Cinemática": "Soportadas por dispersión de velocidades: las estrellas siguen órbitas desordenadas. La rotación global es pequeña.",
-        "Perfil de brillo": "Ley de de Vaucouleurs (R^1/4), muy concentrada.",
-        "Índice de concentración": "C = r90/r50 ≈ 2.8 – 3.5, el más alto de todos los tipos."
+        "Población estelar": {
+          "texto": "Dominada por estrellas viejas de Población II, de baja masa y color rojo. Edades típicas superiores a 8 mil millones de años.",
+          "porque": "Sin gas frío no se forman estrellas nuevas. Las masivas y azules, que viven pocos millones de años, ya murieron; solo quedan las de baja masa, que son rojas y longevas."
+        },
+        "Gas y polvo": {
+          "texto": "Muy escasos. El medio interestelar está mayoritariamente en fase caliente (detectable en rayos X), no en nubes moleculares frías.",
+          "porque": "El gas fue consumido, expulsado por vientos galácticos y núcleos activos, o calentado hasta impedir su colapso gravitatorio."
+        },
+        "Formación estelar": {
+          "texto": "Prácticamente detenida. Por debajo de 0.1 masas solares por año incluso en las más masivas.",
+          "porque": "Se las describe como 'rojas y muertas'. Su evolución reciente es pasiva: envejecimiento de la población existente."
+        },
+        "Color típico": {
+          "texto": "g − r ≈ 0.75 – 0.95, el extremo rojo de la distribución.",
+          "porque": "Este índice de color es una de las dos señales más discriminantes del problema, junto con la concentración."
+        },
+        "Masa estelar": {
+          "texto": "10⁸ a 10¹³ masas solares. Incluye las galaxias más masivas del universo local (cD en centros de cúmulos).",
+          "porque": "Las más masivas se forman por fusiones sucesivas, un proceso que destruye discos y produce órbitas desordenadas."
+        },
+        "Cinemática": {
+          "texto": "Soportadas por dispersión de velocidades: las estrellas siguen órbitas desordenadas en tres dimensiones.",
+          "porque": "No hay un plano de rotación preferente. La energía cinética está en movimiento aleatorio, no en rotación coherente."
+        },
+        "Perfil de brillo": {
+          "texto": "Ley de de Vaucouleurs: I(R) ∝ exp[−7.67((R/Rₑ)^(1/4) − 1)].",
+          "porque": "Este perfil concentra mucha luz en el centro y decae lentamente en las afueras, lo que produce índices de concentración altos."
+        },
+        "Índice de concentración": {
+          "texto": "C = r₉₀/r₅₀ ≈ 2.8 – 3.5, el más alto de todos los tipos.",
+          "porque": "Es el parámetro más discriminante entre elípticas y espirales, y el que encabeza la importancia en nuestro modelo."
+        }
       },
-      "clave_visual": "Brillo que decae suavemente sin rasgos abruptos. Sin brazos, sin banda de polvo, sin bordes definidos.",
-      "por_que_se_clasifica_bien": "Su alta concentración y su color rojo son las dos señales más separables del problema. Es la clase con mejor desempeño en todos los modelos."
+      "reconocer": [
+        "El brillo decae suavemente, sin rasgos abruptos ni bordes definidos.",
+        "No hay brazos, ni banda de polvo, ni regiones azules.",
+        "El color es uniformemente rojizo o amarillento en toda la extensión.",
+        "La forma proyectada es una elipse limpia."
+      ],
+      "nota_modelo": "Es la clase con mejor desempeño en todos los modelos: su concentración alta y su color rojo son las dos señales más separables del problema."
     },
 
     "Disk": {
       "nombre": "Disco",
-      "hubble": "S0 / discos de canto",
-      "resumen": "Galaxias con un disco identificable pero sin patrón espiral visible. Reúne dos poblaciones: discos vistos de canto, donde la geometría impide ver los brazos, y discos de frente sin estructura espiral apreciable (lenticulares).",
+      "hubble": "S0 · discos de canto",
+      "svg": "disco_canto",
+      "resumen": "Galaxias con disco identificable pero sin patrón espiral visible. Reúne dos poblaciones distintas: discos vistos de canto, donde la geometría impide ver los brazos, y discos de frente sin estructura espiral apreciable (lenticulares).",
       "caracteristicas": {
-        "Población estelar": "Mezcla de un bulbo viejo y rojo con un disco de población intermedia. En las lenticulares el disco también es viejo.",
-        "Gas y polvo": "Variable. Los discos de canto muestran a menudo una banda de polvo oscura que cruza el plano medio; las lenticulares suelen estar empobrecidas en gas.",
-        "Formación estelar": "Baja a moderada. Las lenticulares se consideran discos que agotaron o perdieron su gas.",
-        "Color típico": "g − r ≈ 0.6 – 0.85",
-        "Masa estelar": "10⁹ – 10¹¹ masas solares",
-        "Cinemática": "Soportadas por rotación: el disco gira de forma ordenada con curvas de rotación planas.",
-        "Perfil de brillo": "Disco exponencial más un bulbo central de tipo de Vaucouleurs.",
-        "Índice de concentración": "C ≈ 2.3 – 3.0, intermedio."
+        "Población estelar": {
+          "texto": "Mezcla de un bulbo viejo y rojo con un disco de población intermedia. En las lenticulares el disco también es viejo.",
+          "porque": "Las lenticulares se interpretan como discos que agotaron o perdieron su gas, conservando la estructura pero no la actividad."
+        },
+        "Gas y polvo": {
+          "texto": "Variable. Los discos de canto muestran a menudo una banda oscura que cruza el plano medio; las lenticulares suelen estar empobrecidas.",
+          "porque": "El polvo se concentra en el plano del disco. Visto de perfil, absorbe la luz de las estrellas detrás y produce la banda característica."
+        },
+        "Formación estelar": {
+          "texto": "Baja a moderada, entre 0.1 y algunas masas solares por año.",
+          "porque": "Depende de cuánto gas frío conserve el disco, algo muy sensible al entorno: en cúmulos densos el gas es arrastrado."
+        },
+        "Color típico": {
+          "texto": "g − r ≈ 0.6 – 0.85, intermedio entre elípticas y espirales.",
+          "porque": "En los objetos de canto el color aparente está además enrojecido por la extinción del propio polvo."
+        },
+        "Masa estelar": {
+          "texto": "10⁹ a 10¹¹ masas solares.",
+          "porque": "Rango típico de las galaxias de disco en general."
+        },
+        "Cinemática": {
+          "texto": "Soportadas por rotación: el disco gira de forma ordenada con curvas de rotación planas.",
+          "porque": "La planitud de esas curvas a gran radio es una de las evidencias clásicas de materia oscura."
+        },
+        "Perfil de brillo": {
+          "texto": "Disco exponencial I(R) ∝ exp(−R/h) más un bulbo central de tipo de Vaucouleurs.",
+          "porque": "La razón bulbo/disco es lo que ordena la subsecuencia S0 → Sa → Sb → Sc."
+        },
+        "Índice de concentración": {
+          "texto": "C ≈ 2.3 – 3.0, intermedio.",
+          "porque": "Refleja la presencia de un bulbo apreciable sobre un disco extendido."
+        }
       },
-      "clave_visual": "Forma alargada y elipticidad alta en los objetos de canto, frecuentemente con banda de polvo. En los de frente, un disco liso con bulbo pero sin brazos.",
-      "por_que_es_dificil": "Es una clase heterogénea por construcción: reúne dos configuraciones que se parecen poco entre sí. Además, un disco de canto con brazos es indistinguible de uno sin ellos, porque la geometría los oculta. Es la frontera donde también dudan los voluntarios humanos."
+      "reconocer": [
+        "Forma alargada y elipticidad alta en los objetos vistos de canto.",
+        "Banda de polvo oscura cruzando el eje mayor, frecuente pero no universal.",
+        "En los vistos de frente: disco liso con bulbo, sin brazos ni grumos azules.",
+        "Bulbo central claramente más brillante que el resto."
+      ],
+      "nota_modelo": "Es una clase heterogénea por construcción: reúne dos configuraciones que se parecen poco entre sí. Además, un disco de canto con brazos es indistinguible de uno sin ellos, porque la geometría los oculta. Es la frontera donde también dudan los voluntarios humanos."
     },
 
     "Spiral": {
       "nombre": "Espiral",
-      "hubble": "Sa – Sc / SBa – SBc",
-      "resumen": "Discos vistos con inclinación suficiente para distinguir brazos espirales. La subsecuencia Sa→Sc va de bulbo prominente y brazos cerrados a bulbo pequeño y brazos abiertos y fragmentados.",
+      "hubble": "Sa – Sc · SBa – SBc",
+      "svg": "espiral",
+      "resumen": "Discos vistos con inclinación suficiente para distinguir brazos espirales. La subsecuencia Sa → Sc va de bulbo prominente y brazos cerrados a bulbo pequeño y brazos abiertos y fragmentados.",
       "caracteristicas": {
-        "Población estelar": "Bulbo viejo y rojo; disco con población joven concentrada en los brazos, donde se forman estrellas masivas y azules de tipo O y B.",
-        "Gas y polvo": "Abundantes. El gas molecular se concentra en los brazos, que actúan como ondas de densidad que comprimen el material.",
-        "Formación estelar": "Activa. Entre 0.5 y 20 masas solares por año, creciendo hacia los tipos tardíos (Sc).",
-        "Color típico": "g − r ≈ 0.35 – 0.65 (nube azul)",
-        "Masa estelar": "10⁹ – 10¹¹·⁵ masas solares",
-        "Cinemática": "Rotación ordenada. La discrepancia entre la curva de rotación observada y la masa luminosa es la evidencia clásica de materia oscura.",
-        "Perfil de brillo": "Disco exponencial dominante; bulbo cada vez menor hacia Sc.",
-        "Índice de concentración": "C ≈ 2.0 – 2.8, el más bajo."
+        "Población estelar": {
+          "texto": "Bulbo viejo y rojo; disco con población joven concentrada en los brazos, donde se forman estrellas masivas y azules de tipos O y B.",
+          "porque": "Las estrellas O y B viven solo unos millones de años, así que marcan dónde hay formación estelar ahora mismo."
+        },
+        "Gas y polvo": {
+          "texto": "Abundantes. El gas molecular se concentra en los brazos.",
+          "porque": "Los brazos son ondas de densidad que comprimen el gas al atravesarlo, desencadenando el colapso de nubes moleculares."
+        },
+        "Formación estelar": {
+          "texto": "Activa: entre 0.5 y 20 masas solares por año, creciendo hacia los tipos tardíos (Sc).",
+          "porque": "Los tipos tardíos tienen más gas disponible y menos masa concentrada en el bulbo."
+        },
+        "Color típico": {
+          "texto": "g − r ≈ 0.35 – 0.65, la llamada 'nube azul' del diagrama color-magnitud.",
+          "porque": "La luz de unas pocas estrellas masivas azules domina el color integrado aunque sean minoría en número."
+        },
+        "Masa estelar": {
+          "texto": "10⁹ a 10¹¹·⁵ masas solares.",
+          "porque": "La Vía Láctea, una SBbc, tiene unas 6×10¹⁰ masas solares en estrellas."
+        },
+        "Cinemática": {
+          "texto": "Rotación ordenada con curvas planas hasta grandes radios.",
+          "porque": "La discrepancia entre la curva observada y la masa luminosa fue la evidencia decisiva de materia oscura (Rubin y Ford, 1970)."
+        },
+        "Perfil de brillo": {
+          "texto": "Disco exponencial dominante; el bulbo se reduce progresivamente hacia Sc.",
+          "porque": "Por eso el índice de concentración baja a lo largo de la subsecuencia."
+        },
+        "Índice de concentración": {
+          "texto": "C ≈ 2.0 – 2.8, el más bajo de todos los tipos.",
+          "porque": "La luz está repartida en un disco extendido en vez de concentrada en un núcleo."
+        }
       },
-      "clave_visual": "Brazos que nacen del centro o de una barra y se enrollan hacia afuera, más azules y grumosos que el resto del disco.",
-      "barras": "Cerca de dos tercios de las espirales del universo local presentan una barra central. La barra redistribuye momento angular y canaliza gas hacia el núcleo, alimentando formación estelar central y, en algunos casos, el agujero negro supermasivo."
+      "reconocer": [
+        "Brazos que nacen del centro o de los extremos de una barra y se enrollan hacia afuera.",
+        "Los brazos son más azules y grumosos que el disco subyacente.",
+        "Regiones HII visibles como nudos brillantes a lo largo de los brazos.",
+        "Bulbo central de tamaño variable según el subtipo."
+      ],
+      "extra_barras": "Cerca de dos tercios de las espirales del universo local presentan una barra central. La barra no es un accidente: redistribuye momento angular, canaliza gas hacia el núcleo y alimenta formación estelar central y, en algunos casos, el agujero negro supermasivo."
     },
 
     "Star/Artifact": {
       "nombre": "Estrella o artefacto",
       "hubble": "—",
+      "svg": "puntual",
       "resumen": "Fuentes puntuales (estrellas de nuestra propia galaxia) y defectos de imagen: rayos cósmicos, columnas de saturación, reflejos internos del telescopio.",
       "caracteristicas": {
-        "Naturaleza": "No son galaxias. Se incluyen en el árbol de Galaxy Zoo para que los voluntarios puedan descartarlas explícitamente.",
-        "Apariencia": "Perfil idéntico a la función de dispersión puntual (PSF) del instrumento, o geometría claramente artificial (líneas rectas, picos de difracción).",
-        "Frecuencia": "Muy baja en este conjunto: 59 objetos de 61 578 (0.10 %)."
+        "Naturaleza": {
+          "texto": "No son galaxias. Se incluyen en el árbol de Galaxy Zoo para que los voluntarios puedan descartarlas explícitamente.",
+          "porque": "Un catálogo fotométrico automático inevitablemente incluye contaminantes; el cuestionario permite marcarlos."
+        },
+        "Apariencia": {
+          "texto": "Perfil idéntico a la función de dispersión puntual (PSF) del instrumento, o geometría claramente artificial.",
+          "porque": "Una estrella está tan lejos que es puntual: su imagen es solo la respuesta del telescopio y la atmósfera."
+        },
+        "Frecuencia": {
+          "texto": "Muy baja en este conjunto: 59 objetos de 61 578 (0.10 %).",
+          "porque": "El catálogo ya había sido filtrado para seleccionar objetos extensos antes de llegar a Galaxy Zoo."
+        }
       },
-      "nota_metodologica": "Con solo 59 ejemplos, esta clase no es evaluable de forma fiable dentro del problema multiclase: sus curvas ROC se calcularían sobre un puñado de objetos en el conjunto de prueba. Por eso se excluye del resultado principal y se trata, si acaso, como una tarea binaria de detección con métricas apropiadas al desbalance."
+      "reconocer": [
+        "Fuente compacta sin estructura interna resuelta.",
+        "Picos de difracción en cruz alrededor de objetos brillantes.",
+        "Líneas rectas o columnas: saturación del detector o rayos cósmicos.",
+        "Tamaño aparente idéntico al de otras fuentes puntuales del campo."
+      ],
+      "nota_modelo": "Con solo 59 ejemplos, esta clase no es evaluable de forma fiable dentro del problema multiclase: sus curvas ROC se calcularían sobre un puñado de objetos en el conjunto de prueba. Por eso se excluye del resultado principal."
     }
   },
 
-  "secuencia_hubble": [
-    {"tipo": "E0", "familia": "Elíptica", "desc": "Prácticamente circular en proyección."},
-    {"tipo": "E7", "familia": "Elíptica", "desc": "Marcadamente alargada. El número indica 10·(1 − b/a)."},
-    {"tipo": "S0", "familia": "Lenticular", "desc": "Disco y bulbo, sin brazos. Puente entre elípticas y espirales."},
-    {"tipo": "Sa", "familia": "Espiral", "desc": "Bulbo grande, brazos apretados y suaves."},
-    {"tipo": "Sb", "familia": "Espiral", "desc": "Bulbo intermedio, brazos bien definidos."},
-    {"tipo": "Sc", "familia": "Espiral", "desc": "Bulbo pequeño, brazos abiertos y grumosos."},
-    {"tipo": "SBa", "familia": "Espiral barrada", "desc": "Como Sa, con barra central."},
-    {"tipo": "SBb", "familia": "Espiral barrada", "desc": "Como Sb, con barra central."},
-    {"tipo": "SBc", "familia": "Espiral barrada", "desc": "Como Sc, con barra central."},
-    {"tipo": "Irr", "familia": "Irregular", "desc": "Sin simetría. Baja masa, rica en gas, formación estelar intensa."}
+  "otros_tipos": [
+    {
+      "nombre": "Galaxias irregulares (Irr I, Irr II)",
+      "resumen": "Sin simetría reconocible ni estructura ordenada. Hubble las dejó fuera del diapasón por no encajar en ninguna rama.",
+      "detalle": "Suelen ser de baja masa (10⁷–10⁹ masas solares), muy ricas en gas y con formación estelar intensa por unidad de masa. Las Nubes de Magallanes son el ejemplo clásico. Irr I conserva algo de estructura y población joven; Irr II es completamente caótica, a menudo por interacción reciente. En el universo temprano las galaxias irregulares eran mucho más frecuentes: la morfología ordenada es un fenómeno tardío.",
+      "en_gz2": "Aparecen en Q6 de Galaxy Zoo 2 como 'algo inusual', junto con anillos, lentes gravitacionales y objetos en fusión."
+    },
+    {
+      "nombre": "Galaxias enanas (dE, dSph, dIrr, BCD)",
+      "resumen": "Las más numerosas del universo, pero también las más difíciles de detectar por su bajo brillo superficial.",
+      "detalle": "Las enanas elípticas (dE) y esferoidales (dSph) son pobres en gas y orbitan galaxias mayores. Las enanas irregulares (dIrr) conservan gas y forman estrellas. Las compactas azules (BCD) atraviesan episodios intensos de formación estelar. La Vía Láctea tiene decenas de satélites enanos conocidos.",
+      "en_gz2": "Prácticamente ausentes del conjunto: el corte de brillo del SDSS las excluye salvo las más cercanas."
+    },
+    {
+      "nombre": "Galaxias peculiares y en interacción",
+      "resumen": "Sistemas deformados por fuerzas de marea durante encuentros o fusiones.",
+      "detalle": "Producen colas de marea, puentes de material y anillos. El Atlas de Galaxias Peculiares de Halton Arp (1966) catalogó 338 casos. Una fusión mayor entre dos espirales puede destruir ambos discos y producir una elíptica, lo que conecta las dos ramas del diapasón por un camino evolutivo real.",
+      "en_gz2": "Q6 y Q8 de Galaxy Zoo 2 recogen fusiones, colas de marea, anillos y perturbaciones."
+    },
+    {
+      "nombre": "Galaxias anulares (ring galaxies)",
+      "resumen": "Un anillo de formación estelar rodeando un núcleo, a veces sin material entre ambos.",
+      "detalle": "Se forman cuando una galaxia pequeña atraviesa el disco de una mayor casi perpendicularmente, generando una onda de densidad circular que se propaga hacia afuera. El Objeto de la Rueda de Carro es el caso arquetípico.",
+      "en_gz2": "Categoría explícita en la pregunta sobre objetos inusuales."
+    },
+    {
+      "nombre": "Galaxias activas (AGN, Seyfert, cuásares, radiogalaxias)",
+      "resumen": "Núcleos que emiten más energía que todas las estrellas de la galaxia juntas.",
+      "detalle": "La fuente es la acreción de materia sobre un agujero negro supermasivo. Las Seyfert son espirales con núcleo puntual muy brillante; los cuásares son tan luminosos que a gran distancia la galaxia anfitriona desaparece; las radiogalaxias, casi siempre elípticas, lanzan chorros que se extienden mucho más allá del cuerpo visible. La actividad nuclear es una fase, no un tipo morfológico.",
+      "en_gz2": "No es una categoría morfológica del cuestionario, pero un núcleo muy brillante puede sesgar la respuesta hacia 'lisa'."
+    },
+    {
+      "nombre": "Galaxias de bajo brillo superficial (LSB)",
+      "resumen": "Discos extendidos y muy tenues, apenas por encima del brillo del cielo nocturno.",
+      "detalle": "Malin 1 es el ejemplo extremo: un disco de más de 200 000 años luz de diámetro casi invisible. Están dominadas por materia oscura y tienen muy baja eficiencia de formación estelar. Constituyen un sesgo importante en los catálogos: los sondeos las pierden sistemáticamente.",
+      "en_gz2": "Muy escasas por el mismo motivo. Cuando aparecen, el consenso de los voluntarios suele ser bajo."
+    }
   ],
 
-  "arbol_gz2": {
-    "descripcion": "El cuestionario de Galaxy Zoo 2 es un árbol de decisión: cada pregunta se formula solo si la respuesta anterior lo justifica. Por eso las 37 respuestas no son independientes, y la probabilidad de una hoja es el producto de las probabilidades condicionadas a lo largo de la rama.",
-    "preguntas_usadas": [
-      {"id": "Q1", "texto": "¿Es lisa y redondeada, tiene alguna estructura o es una estrella/artefacto?",
-       "respuestas": ["Lisa", "Con estructura o disco", "Estrella o artefacto"]},
-      {"id": "Q2", "texto": "¿Podría ser un disco visto de canto?",
-       "respuestas": ["Sí", "No"], "condicion": "Solo si Q1 = con estructura"},
-      {"id": "Q4", "texto": "¿Hay señales de un patrón espiral?",
-       "respuestas": ["Sí", "No"], "condicion": "Solo si Q2 = no de canto"}
+  "hubble": {
+    "historia": [
+      {
+        "anio": "1920",
+        "titulo": "El Gran Debate",
+        "texto": "Harlow Shapley y Heber Curtis discuten en el Museo Nacional de Historia Natural si las 'nebulosas espirales' están dentro de la Vía Láctea o son sistemas estelares independientes. La cuestión queda sin resolver: no había forma de medir sus distancias."
+      },
+      {
+        "anio": "1924",
+        "titulo": "Cefeidas en Andrómeda",
+        "texto": "Edwin Hubble identifica estrellas variables cefeidas en M31 con el telescopio de 2.5 m de Monte Wilson. Aplicando la relación período-luminosidad de Henrietta Leavitt, calcula una distancia que sitúa a Andrómeda muy fuera de la Vía Láctea. Las nebulosas espirales son galaxias."
+      },
+      {
+        "anio": "1926",
+        "titulo": "Primera clasificación",
+        "texto": "Hubble publica una clasificación morfológica en el Astrophysical Journal, ordenando las galaxias por su apariencia en elípticas, espirales normales, espirales barradas e irregulares."
+      },
+      {
+        "anio": "1936",
+        "titulo": "El diapasón",
+        "texto": "En 'The Realm of the Nebulae' presenta el diagrama en forma de diapasón, con las elípticas en el mango y las dos ramas de espirales bifurcándose. Es la representación que sigue usándose casi un siglo después."
+      },
+      {
+        "anio": "1959–1961",
+        "titulo": "Refinamientos",
+        "texto": "Gérard de Vaucouleurs extiende el esquema a tres dimensiones añadiendo anillos y etapas intermedias (SAB, Sd, Sm). Allan Sandage publica el Hubble Atlas of Galaxies con ejemplos fotográficos de cada tipo."
+      },
+      {
+        "anio": "2007–2013",
+        "titulo": "Galaxy Zoo",
+        "texto": "El proyecto abre la clasificación a voluntarios en internet. Galaxy Zoo 2 (Willett et al. 2013) publica clasificaciones detalladas de 304 122 galaxias del SDSS mediante un cuestionario en árbol, con más de 16 millones de respuestas."
+      }
     ],
-    "advertencia": "Q4 nunca se formula a los discos vistos de canto: el flujo salta a la pregunta sobre la forma del bulbo. Ignorar esa condición hace que las galaxias de canto queden con probabilidad cercana a cero en Q4 y desaparezcan del conjunto de entrenamiento."
+    "malentendido": "Hubble llamó 'tempranas' a las elípticas y 'tardías' a las espirales por su posición en el diagrama, no por su edad. La terminología sobrevive y sigue causando confusión: no hay ninguna evolución de izquierda a derecha. De hecho, la evidencia actual apunta en sentido contrario, ya que las fusiones de espirales producen elípticas.",
+    "elipticidad": {
+      "formula": "n = 10 × (1 − b/a)",
+      "explicacion": "El número que acompaña a la E mide cuán aplanada se ve la galaxia en proyección, donde a es el semieje mayor y b el menor. Una E0 se ve circular (b/a = 1); una E7 es la más alargada del esquema (b/a = 0.3).",
+      "por_que_no_e8": "No existen E8, E9 ni E10 en la práctica. Un elipsoide estelar sin rotación significativa que superara esa elongación sería dinámicamente inestable y se disolvería. Las estructuras más planas que E7 necesitan rotación para sostenerse, y entonces ya son discos: por eso el mango del diapasón termina en E7 y da paso a las lenticulares S0.",
+      "advertencia": "La clasificación En depende de la orientación: una elíptica muy aplanada vista de frente parece E0. El número describe la apariencia proyectada, no la forma tridimensional real."
+    },
+    "criterios": [
+      {"tipo": "E0–E7", "bulbo": "Todo el objeto", "brazos": "Ninguno", "gas": "Muy poco", "color": "Rojo", "concentracion": "Muy alta"},
+      {"tipo": "S0", "bulbo": "Dominante", "brazos": "Ninguno", "gas": "Poco", "color": "Rojo-intermedio", "concentracion": "Alta"},
+      {"tipo": "Sa / SBa", "bulbo": "Grande", "brazos": "Cerrados y suaves", "gas": "Moderado", "color": "Intermedio", "concentracion": "Media-alta"},
+      {"tipo": "Sb / SBb", "bulbo": "Intermedio", "brazos": "Bien definidos", "gas": "Abundante", "color": "Azul-intermedio", "concentracion": "Media"},
+      {"tipo": "Sc / SBc", "bulbo": "Pequeño", "brazos": "Abiertos y grumosos", "gas": "Muy abundante", "color": "Azul", "concentracion": "Baja"},
+      {"tipo": "Irr", "bulbo": "Ausente", "brazos": "Sin estructura", "gas": "Dominante", "color": "Muy azul", "concentracion": "Muy baja"}
+    ],
+    "nomenclatura": [
+      {"simbolo": "E n", "significado": "Elíptica con elipticidad n = 10(1 − b/a). De E0 (circular) a E7 (muy alargada)."},
+      {"simbolo": "S0", "significado": "Lenticular: tiene disco y bulbo, pero no brazos espirales. Puente entre elípticas y espirales."},
+      {"simbolo": "S a/b/c", "significado": "Espiral normal. La letra indica el grado de apertura de los brazos y el tamaño relativo del bulbo."},
+      {"simbolo": "SB a/b/c", "significado": "Espiral barrada: los brazos nacen de los extremos de una barra central en vez del núcleo."},
+      {"simbolo": "SAB", "significado": "Barra débil o intermedia. Añadido por de Vaucouleurs, no estaba en el esquema original de Hubble."},
+      {"simbolo": "Sd, Sm", "significado": "Extensiones hacia tipos aún más tardíos, casi sin bulbo. Sm son 'tipo Magallánico'."},
+      {"simbolo": "Irr", "significado": "Irregular: sin simetría reconocible. Hubble las situó fuera del diapasón."},
+      {"simbolo": "pec", "significado": "Peculiar: sufijo para objetos deformados por interacción o fusión."}
+    ]
+  },
+
+  "arbol_gz2": {
+    "descripcion": "El cuestionario de Galaxy Zoo 2 es un árbol de decisión con 11 preguntas y 37 respuestas posibles. Cada pregunta se formula solo si la respuesta anterior lo justifica, así que las 37 respuestas no son independientes entre sí.",
+    "formula": "La probabilidad de una hoja es el producto de las probabilidades condicionadas a lo largo de la rama recorrida.",
+    "preguntas": [
+      {"id": "Q1", "texto": "¿Es lisa y redondeada, tiene alguna estructura o es una estrella/artefacto?",
+       "respuestas": ["Lisa", "Con estructura o disco", "Estrella o artefacto"],
+       "condicion": "Siempre se formula", "usada": true},
+      {"id": "Q2", "texto": "¿Podría ser un disco visto de canto?",
+       "respuestas": ["Sí", "No"], "condicion": "Solo si Q1 = con estructura", "usada": true},
+      {"id": "Q3", "texto": "¿Hay señales de una barra central?",
+       "respuestas": ["Sí", "No"], "condicion": "Solo si Q2 = no de canto", "usada": false},
+      {"id": "Q4", "texto": "¿Hay señales de un patrón espiral?",
+       "respuestas": ["Sí", "No"], "condicion": "Solo si Q2 = no de canto", "usada": true},
+      {"id": "Q5", "texto": "¿Qué tan prominente es el bulbo central?",
+       "respuestas": ["Ninguno", "Apenas visible", "Obvio", "Dominante"],
+       "condicion": "Solo si Q2 = no de canto", "usada": false},
+      {"id": "Q6", "texto": "¿Hay algo inusual?",
+       "respuestas": ["Sí", "No"], "condicion": "Siempre tras la rama principal", "usada": false},
+      {"id": "Q7", "texto": "¿Qué tan redondeada es?",
+       "respuestas": ["Completamente redonda", "Intermedia", "Tipo cigarro"],
+       "condicion": "Solo si Q1 = lisa", "usada": false},
+      {"id": "Q8", "texto": "¿Qué tipo de rasgo inusual?",
+       "respuestas": ["Anillo", "Arco o lente", "Perturbada", "Irregular", "Otro", "Fusión", "Estela de polvo"],
+       "condicion": "Solo si Q6 = sí", "usada": false},
+      {"id": "Q9", "texto": "¿Qué forma tiene el bulbo visto de canto?",
+       "respuestas": ["Redondeado", "Tipo caja", "Sin bulbo"],
+       "condicion": "Solo si Q2 = sí, de canto", "usada": false},
+      {"id": "Q10", "texto": "¿Qué tan enrollados están los brazos?",
+       "respuestas": ["Muy apretados", "Intermedios", "Abiertos"],
+       "condicion": "Solo si Q4 = sí", "usada": false},
+      {"id": "Q11", "texto": "¿Cuántos brazos espirales hay?",
+       "respuestas": ["1", "2", "3", "4", "Más de 4", "No se puede saber"],
+       "condicion": "Solo si Q4 = sí", "usada": false}
+    ],
+    "advertencia": "Q4 nunca se formula a los discos vistos de canto: el flujo salta a Q9, sobre la forma del bulbo. Ignorar esa condición hace que las galaxias de canto queden con probabilidad cercana a cero en Q4 y desaparezcan del conjunto de entrenamiento. En este proyecto ese error redujo la clase Disk de 19 597 a 145 objetos."
+  },
+
+  "metodologia": {
+    "bandas": {
+      "titulo": "Las bandas fotométricas g, r, i",
+      "intro": "El SDSS observa el cielo a través de cinco filtros (u, g, r, i, z) que dejan pasar rangos concretos de longitud de onda. Cada imagen es una medida del flujo en ese rango, no una fotografía en color.",
+      "detalle": [
+        {"banda": "u", "rango": "≈ 355 nm", "region": "Ultravioleta cercano", "uso": "Formación estelar muy reciente. Poco profunda y ruidosa."},
+        {"banda": "g", "rango": "≈ 470 nm", "region": "Azul-verde", "uso": "Sensible a estrellas jóvenes y masivas. Se asigna al canal AZUL."},
+        {"banda": "r", "rango": "≈ 620 nm", "region": "Rojo", "uso": "Banda de referencia para fotometría. Se asigna al canal VERDE."},
+        {"banda": "i", "rango": "≈ 750 nm", "region": "Infrarrojo cercano", "uso": "Traza la masa estelar vieja. Se asigna al canal ROJO."},
+        {"banda": "z", "rango": "≈ 890 nm", "region": "Infrarrojo", "uso": "Objetos muy enrojecidos o a alto desplazamiento al rojo."}
+      ],
+      "composicion": "La imagen RGB del conjunto de datos combina i→R, r→G, g→B. Una galaxia que se ve roja emite más en el infrarrojo cercano que en el azul: población estelar vieja. Una que se ve azul tiene formación estelar activa.",
+      "consecuencia": "Por eso el color de la imagen no es decorativo: es una medida física de la población estelar dominante, y ese es exactamente el motivo de conservarlo en el preprocesamiento."
+    },
+    "asinh": {
+      "titulo": "El estiramiento asinh",
+      "problema": "El rango dinámico de una galaxia es enorme: el núcleo puede ser miles de veces más brillante que las regiones exteriores. Con una escala lineal en 8 bits, o el núcleo satura en blanco o el disco se pierde en el negro.",
+      "solucion": "Lupton et al. (2004) propusieron mapear el flujo con el seno hiperbólico inverso en lugar del logaritmo.",
+      "formula": "valor = asinh(f / β) / asinh(1 / β)",
+      "ventaja": "Para flujos bajos asinh se comporta como una función lineal, así que el ruido del cielo no se amplifica y el fondo se mantiene limpio. Para flujos altos se comporta como un logaritmo, comprimiendo el núcleo brillante. El logaritmo puro, en cambio, diverge cerca de cero y amplifica el ruido del fondo.",
+      "consecuencia": "Esta transformación es NO LINEAL y NO INVERTIBLE sin conocer β y la calibración original. Por eso los colores y radios que medimos sobre el JPEG son proxies monótonos de las cantidades físicas, no magnitudes SDSS. Es una limitación que hay que declarar, no un detalle menor."
+    },
+    "recorte": {
+      "titulo": "El recorte de la región central",
+      "hecho": "Las imágenes son de 424 × 424 px, pero la galaxia objetivo ocupa aproximadamente el cuadrado central de 207 × 207.",
+      "cuenta": "Eso significa que alrededor del 76 % de los píxeles no pertenecen al objeto que se quiere clasificar: son cielo vacío y galaxias o estrellas vecinas.",
+      "algoritmico": "Al reducir la imagen completa a 64 × 64, cada píxel de salida promedia unos 44 píxeles de entrada, de los cuales la mayoría son fondo. La señal del objeto queda diluida y el PCA gasta componentes en modelar variaciones del cielo.",
+      "fisico": "Las fuentes vecinas son contaminantes reales: el análisis Grad-CAM del modelo entrenado muestra que en campos poblados la red desvía su atención hacia ellas, y ahí se concentran los errores.",
+      "resultado": "Recortar y conservar el color aportó +3.0 puntos de exactitud con el mismo modelo (SVM-RBF) y la misma partición."
+    },
+    "color": {
+      "titulo": "Por qué se conserva el color",
+      "fisico": "El índice de color g − r mide la temperatura efectiva de la población estelar dominante. Elípticas: 0.75–0.95 (estrellas viejas y frías). Espirales: 0.35–0.65 (estrellas jóvenes y calientes). Es una separación física, no un artefacto de la imagen.",
+      "algoritmico": "Convertir a escala de grises promedia los tres canales y destruye esa información de forma irreversible. Se pasa de 12 288 dimensiones a 4 096, pero las 8 192 descartadas contenían el segundo discriminante más fuerte del problema.",
+      "consecuencia_aumentacion": "Por el mismo motivo, la aumentación de datos NO altera el color ni el brillo, aunque sea práctica habitual en visión por computador. Sí aplica rotaciones completas de 360° y reflexiones: las galaxias no tienen orientación privilegiada en el cielo, así que esas transformaciones producen imágenes igualmente válidas."
+    },
+    "fugas": {
+      "titulo": "Control de fugas de información",
+      "problema": "Ajustar el escalado o el PCA sobre el conjunto completo antes de dividir en entrenamiento y prueba filtra información del test al modelo, e infla las métricas.",
+      "solucion": "Todos los transformadores viven dentro de un Pipeline y se ajustan exclusivamente con los datos de entrenamiento. Las particiones están congeladas en un archivo y son idénticas para los nueve modelos.",
+      "verificacion": "El KNN obtuvo F1-macro 0.7854 en validación cruzada y 0.7909 en el conjunto de prueba. Esa coincidencia es la señal de que no hay fuga."
+    }
+  },
+
+  "metricas": {
+    "accuracy": {
+      "nombre": "Exactitud (accuracy)",
+      "formula": "(VP + VN) / total",
+      "que_mide": "La proporción de predicciones correctas sobre el total.",
+      "cuando_engana": "Con clases desbalanceadas es profundamente engañosa. En este proyecto, un modelo que ignoraba por completo la clase Disk alcanzaba 0.895 de exactitud simplemente porque esa clase representaba el 0.7 % de los datos."
+    },
+    "precision": {
+      "nombre": "Precisión (precision)",
+      "formula": "VP / (VP + FP)",
+      "que_mide": "De todo lo que el modelo predijo como clase X, qué proporción realmente lo era.",
+      "cuando_importa": "Cuando un falso positivo es costoso. Si se quiere construir un catálogo limpio de espirales para un estudio posterior, interesa alta precisión."
+    },
+    "recall": {
+      "nombre": "Exhaustividad (recall)",
+      "formula": "VP / (VP + FN)",
+      "que_mide": "De todas las galaxias que realmente son clase X, qué proporción encontró el modelo.",
+      "cuando_importa": "Cuando perder objetos es costoso. Si se buscan candidatos raros para seguimiento espectroscópico, interesa alto recall."
+    },
+    "f1": {
+      "nombre": "F1",
+      "formula": "2 · (precisión · recall) / (precisión + recall)",
+      "que_mide": "La media armónica de precisión y recall. Penaliza fuertemente que una de las dos sea baja.",
+      "cuando_importa": "Cuando hace falta un solo número que resuma el compromiso entre ambas."
+    },
+    "macro_f1": {
+      "nombre": "F1-macro",
+      "formula": "promedio simple del F1 de cada clase",
+      "que_mide": "El F1 de cada clase pesado por igual, sin importar cuántos ejemplos tenga.",
+      "cuando_importa": "Es la métrica principal de este trabajo. Con clases desbalanceadas, es la que delata a un modelo que ignora la clase minoritaria: si una clase falla, el promedio cae aunque las otras sean perfectas."
+    },
+    "specificity": {
+      "nombre": "Especificidad",
+      "formula": "VN / (VN + FP)",
+      "que_mide": "De todas las galaxias que NO son clase X, qué proporción el modelo descartó correctamente.",
+      "cuando_importa": "Complementa al recall. Un modelo con recall alto y especificidad baja simplemente asigna todo a esa clase."
+    },
+    "npv": {
+      "nombre": "Valor predictivo negativo (NPV)",
+      "formula": "VN / (VN + FN)",
+      "que_mide": "De todo lo que el modelo descartó como clase X, qué proporción realmente no lo era.",
+      "cuando_importa": "Es la contraparte de la precisión para la clase negativa."
+    },
+    "g_mean": {
+      "nombre": "Media geométrica (G-Mean)",
+      "formula": "√(recall × especificidad)",
+      "que_mide": "El equilibrio entre acertar los positivos y descartar los negativos.",
+      "cuando_importa": "Diseñada para datos desbalanceados: si cualquiera de las dos es baja, la media geométrica se hunde."
+    },
+    "roc_auc": {
+      "nombre": "AUC-ROC",
+      "formula": "área bajo la curva TPR vs FPR",
+      "que_mide": "La probabilidad de que el modelo asigne mayor puntuación a un positivo elegido al azar que a un negativo elegido al azar.",
+      "cuando_engana": "Con clases muy desbalanceadas puede parecer alta aunque el modelo funcione mal en la clase minoritaria, porque el eje FPR está dominado por la clase mayoritaria."
+    },
+    "avg_precision": {
+      "nombre": "Precisión promedio (AP)",
+      "formula": "área bajo la curva precisión-recall",
+      "que_mide": "El desempeño resumido en todos los umbrales, ponderando por recall.",
+      "cuando_importa": "Es más informativa que el AUC-ROC cuando las clases están desbalanceadas, porque su línea base es la prevalencia real de la clase y no el 0.5 del azar."
+    }
+  },
+
+  "como_leer": {
+    "matriz_confusion": {
+      "titulo": "Cómo leer una matriz de confusión",
+      "pasos": [
+        "Cada FILA es una clase real: cómo la clasificaron los voluntarios de Galaxy Zoo.",
+        "Cada COLUMNA es lo que predijo el modelo.",
+        "La DIAGONAL son los aciertos. Cuanto más brillante, mejor.",
+        "Fuera de la diagonal están los errores, y su posición dice exactamente qué confundió con qué.",
+        "Normalizada por fila, cada fila suma 1: se lee como 'de las galaxias que realmente eran X, qué porcentaje fue a cada clase'."
+      ],
+      "interpretar": "Un bloque brillante fuera de la diagonal entre dos clases concretas indica que esas dos son difíciles de separar. En este proyecto la confusión dominante es Disk ↔ Spiral, que es exactamente la frontera donde también dudan los humanos: brazos débiles, galaxias muy inclinadas, baja relación señal-ruido."
+    },
+    "roc": {
+      "titulo": "Cómo leer una curva ROC",
+      "pasos": [
+        "El eje X es la tasa de falsos positivos: cuántos negativos se marcaron por error.",
+        "El eje Y es la tasa de verdaderos positivos, que es el recall.",
+        "Cada punto de la curva corresponde a un umbral de decisión distinto.",
+        "La diagonal es el azar: un modelo sobre esa línea no aporta información.",
+        "Cuanto más se acerque la curva a la esquina superior izquierda, mejor."
+      ],
+      "cuidado": "Con clases desbalanceadas la ROC puede verse muy bien aunque el modelo falle en la clase minoritaria, porque el eje de falsos positivos está dominado por la clase mayoritaria. Por eso se reporta también la curva precisión-recall."
+    },
+    "pr": {
+      "titulo": "Cómo leer una curva precisión-recall",
+      "pasos": [
+        "El eje X es el recall: de las galaxias reales de esa clase, cuántas encontró.",
+        "El eje Y es la precisión: de las que predijo, cuántas acertó.",
+        "Existe un compromiso inherente: bajar el umbral sube el recall y suele bajar la precisión.",
+        "La línea base horizontal es la prevalencia de la clase, no el 0.5 del azar.",
+        "El área bajo la curva (AP) resume el desempeño en todos los umbrales."
+      ],
+      "cuidado": "Una curva PR sobre una clase con el 1 % de prevalencia empieza con línea base 0.01. Un AP de 0.4 en ese caso sería excelente, aunque el número parezca bajo en abstracto."
+    }
   }
 }

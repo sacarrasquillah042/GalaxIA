@@ -67,8 +67,8 @@
       "Smooth",
       "Spiral"
     ],
-    "t_entrenamiento_s": 34.72042798995972,
-    "t_inferencia_s": 1.9661273956298828,
+    "t_entrenamiento_s": 51.10439896583557,
+    "t_inferencia_s": 1.9567067623138428,
     "n_test": 3512
   },
   "SVM (RGB + recorte)": {
@@ -139,8 +139,8 @@
       "Smooth",
       "Spiral"
     ],
-    "t_entrenamiento_s": 100.50536155700684,
-    "t_inferencia_s": 2.7280287742614746,
+    "t_entrenamiento_s": 95.04467010498047,
+    "t_inferencia_s": 2.8612220287323,
     "n_test": 3512
   },
   "Regresión logística": {
@@ -211,8 +211,8 @@
       "Smooth",
       "Spiral"
     ],
-    "t_entrenamiento_s": 73.14820194244385,
-    "t_inferencia_s": 0.2089078426361084,
+    "t_entrenamiento_s": 90.3838095664978,
+    "t_inferencia_s": 0.2347879409790039,
     "n_test": 3512
   },
   "SVM (RBF)": {
@@ -283,8 +283,8 @@
       "Smooth",
       "Spiral"
     ],
-    "t_entrenamiento_s": 76.96520972251892,
-    "t_inferencia_s": 3.1382832527160645,
+    "t_entrenamiento_s": 93.84655666351318,
+    "t_inferencia_s": 3.1435341835021973,
     "n_test": 3512
   },
   "Árbol de decisión": {
@@ -355,8 +355,8 @@
       "Smooth",
       "Spiral"
     ],
-    "t_entrenamiento_s": 63.27465844154358,
-    "t_inferencia_s": 0.1876053810119629,
+    "t_entrenamiento_s": 66.50219559669495,
+    "t_inferencia_s": 0.2617354393005371,
     "n_test": 3512
   },
   "SGD (log-loss)": {
@@ -427,8 +427,8 @@
       "Smooth",
       "Spiral"
     ],
-    "t_entrenamiento_s": 52.48382091522217,
-    "t_inferencia_s": 0.16797351837158203,
+    "t_entrenamiento_s": 64.81050825119019,
+    "t_inferencia_s": 0.41004037857055664,
     "n_test": 3512
   },
   "CNN 128px": {

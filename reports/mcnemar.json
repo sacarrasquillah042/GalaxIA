@@ -1,0 +1,42 @@
+[
+  {
+    "Comparaci\u00f3n": "CNN vs MLP-PCA",
+    "solo A acierta": 328,
+    "solo B acierta": 35,
+    "chi2": 234.89,
+    "p-valor": 5.123957265024148e-53,
+    "\u00bfsignificativo?": "s\u00ed"
+  },
+  {
+    "Comparaci\u00f3n": "CNN vs MLP-Params",
+    "solo A acierta": 344,
+    "solo B acierta": 44,
+    "chi2": 230.41,
+    "p-valor": 4.840047173584665e-52,
+    "\u00bfsignificativo?": "s\u00ed"
+  },
+  {
+    "Comparaci\u00f3n": "MLP-PCA vs MLP-Params",
+    "solo A acierta": 180,
+    "solo B acierta": 173,
+    "chi2": 0.1,
+    "p-valor": 0.7494628067840587,
+    "\u00bfsignificativo?": "no"
+  },
+  {
+    "Comparaci\u00f3n": "Fusi\u00f3n vs solo PCA",
+    "solo A acierta": 83,
+    "solo B acierta": 89,
+    "chi2": 0.15,
+    "p-valor": 0.7030204029053497,
+    "\u00bfsignificativo?": "no"
+  },
+  {
+    "Comparaci\u00f3n": "MLP-PCA vs KNN",
+    "solo A acierta": 370,
+    "solo B acierta": 125,
+    "chi2": 120.27,
+    "p-valor": 5.507881105786189e-28,
+    "\u00bfsignificativo?": "s\u00ed"
+  }
+]

@@ -1,6 +1,5 @@
 {
   "_nota": "Contenido educativo de GalaxIA. Rangos típicos de la literatura (Hubble 1926, 1936; de Vaucouleurs 1959; Sandage 1961; Roberts & Haynes 1994; Conselice 2003; Blanton & Moustakas 2009; Willett et al. 2013). Son órdenes de magnitud: la secuencia de Hubble es continua, no un conjunto de cajas discretas.",
-
   "clases_modelo": {
     "Smooth": {
       "nombre": "Lisa (elíptica)",
@@ -49,7 +48,6 @@
       ],
       "nota_modelo": "Es la clase con mejor desempeño en todos los modelos: su concentración alta y su color rojo son las dos señales más separables del problema."
     },
-
     "Disk": {
       "nombre": "Disco",
       "hubble": "S0 · discos de canto",
@@ -97,7 +95,6 @@
       ],
       "nota_modelo": "Es una clase heterogénea por construcción: reúne dos configuraciones que se parecen poco entre sí. Además, un disco de canto con brazos es indistinguible de uno sin ellos, porque la geometría los oculta. Es la frontera donde también dudan los voluntarios humanos."
     },
-
     "Spiral": {
       "nombre": "Espiral",
       "hubble": "Sa – Sc · SBa – SBc",
@@ -145,7 +142,6 @@
       ],
       "extra_barras": "Cerca de dos tercios de las espirales del universo local presentan una barra central. La barra no es un accidente: redistribuye momento angular, canaliza gas hacia el núcleo y alimenta formación estelar central y, en algunos casos, el agujero negro supermasivo."
     },
-
     "Star/Artifact": {
       "nombre": "Estrella o artefacto",
       "hubble": "—",
@@ -174,7 +170,6 @@
       "nota_modelo": "Con solo 59 ejemplos, esta clase no es evaluable de forma fiable dentro del problema multiclase: sus curvas ROC se calcularían sobre un puñado de objetos en el conjunto de prueba. Por eso se excluye del resultado principal."
     }
   },
-
   "otros_tipos": [
     {
       "nombre": "Galaxias irregulares (Irr I, Irr II)",
@@ -213,7 +208,6 @@
       "en_gz2": "Muy escasas por el mismo motivo. Cuando aparecen, el consenso de los voluntarios suele ser bajo."
     }
   ],
-
   "hubble": {
     "historia": [
       {
@@ -255,72 +249,257 @@
       "advertencia": "La clasificación En depende de la orientación: una elíptica muy aplanada vista de frente parece E0. El número describe la apariencia proyectada, no la forma tridimensional real."
     },
     "criterios": [
-      {"tipo": "E0–E7", "bulbo": "Todo el objeto", "brazos": "Ninguno", "gas": "Muy poco", "color": "Rojo", "concentracion": "Muy alta"},
-      {"tipo": "S0", "bulbo": "Dominante", "brazos": "Ninguno", "gas": "Poco", "color": "Rojo-intermedio", "concentracion": "Alta"},
-      {"tipo": "Sa / SBa", "bulbo": "Grande", "brazos": "Cerrados y suaves", "gas": "Moderado", "color": "Intermedio", "concentracion": "Media-alta"},
-      {"tipo": "Sb / SBb", "bulbo": "Intermedio", "brazos": "Bien definidos", "gas": "Abundante", "color": "Azul-intermedio", "concentracion": "Media"},
-      {"tipo": "Sc / SBc", "bulbo": "Pequeño", "brazos": "Abiertos y grumosos", "gas": "Muy abundante", "color": "Azul", "concentracion": "Baja"},
-      {"tipo": "Irr", "bulbo": "Ausente", "brazos": "Sin estructura", "gas": "Dominante", "color": "Muy azul", "concentracion": "Muy baja"}
+      {
+        "tipo": "E0–E7",
+        "bulbo": "Todo el objeto",
+        "brazos": "Ninguno",
+        "gas": "Muy poco",
+        "color": "Rojo",
+        "concentracion": "Muy alta"
+      },
+      {
+        "tipo": "S0",
+        "bulbo": "Dominante",
+        "brazos": "Ninguno",
+        "gas": "Poco",
+        "color": "Rojo-intermedio",
+        "concentracion": "Alta"
+      },
+      {
+        "tipo": "Sa / SBa",
+        "bulbo": "Grande",
+        "brazos": "Cerrados y suaves",
+        "gas": "Moderado",
+        "color": "Intermedio",
+        "concentracion": "Media-alta"
+      },
+      {
+        "tipo": "Sb / SBb",
+        "bulbo": "Intermedio",
+        "brazos": "Bien definidos",
+        "gas": "Abundante",
+        "color": "Azul-intermedio",
+        "concentracion": "Media"
+      },
+      {
+        "tipo": "Sc / SBc",
+        "bulbo": "Pequeño",
+        "brazos": "Abiertos y grumosos",
+        "gas": "Muy abundante",
+        "color": "Azul",
+        "concentracion": "Baja"
+      },
+      {
+        "tipo": "Irr",
+        "bulbo": "Ausente",
+        "brazos": "Sin estructura",
+        "gas": "Dominante",
+        "color": "Muy azul",
+        "concentracion": "Muy baja"
+      }
     ],
     "nomenclatura": [
-      {"simbolo": "E n", "significado": "Elíptica con elipticidad n = 10(1 − b/a). De E0 (circular) a E7 (muy alargada)."},
-      {"simbolo": "S0", "significado": "Lenticular: tiene disco y bulbo, pero no brazos espirales. Puente entre elípticas y espirales."},
-      {"simbolo": "S a/b/c", "significado": "Espiral normal. La letra indica el grado de apertura de los brazos y el tamaño relativo del bulbo."},
-      {"simbolo": "SB a/b/c", "significado": "Espiral barrada: los brazos nacen de los extremos de una barra central en vez del núcleo."},
-      {"simbolo": "SAB", "significado": "Barra débil o intermedia. Añadido por de Vaucouleurs, no estaba en el esquema original de Hubble."},
-      {"simbolo": "Sd, Sm", "significado": "Extensiones hacia tipos aún más tardíos, casi sin bulbo. Sm son 'tipo Magallánico'."},
-      {"simbolo": "Irr", "significado": "Irregular: sin simetría reconocible. Hubble las situó fuera del diapasón."},
-      {"simbolo": "pec", "significado": "Peculiar: sufijo para objetos deformados por interacción o fusión."}
+      {
+        "simbolo": "E n",
+        "significado": "Elíptica con elipticidad n = 10(1 − b/a). De E0 (circular) a E7 (muy alargada)."
+      },
+      {
+        "simbolo": "S0",
+        "significado": "Lenticular: tiene disco y bulbo, pero no brazos espirales. Puente entre elípticas y espirales."
+      },
+      {
+        "simbolo": "S a/b/c",
+        "significado": "Espiral normal. La letra indica el grado de apertura de los brazos y el tamaño relativo del bulbo."
+      },
+      {
+        "simbolo": "SB a/b/c",
+        "significado": "Espiral barrada: los brazos nacen de los extremos de una barra central en vez del núcleo."
+      },
+      {
+        "simbolo": "SAB",
+        "significado": "Barra débil o intermedia. Añadido por de Vaucouleurs, no estaba en el esquema original de Hubble."
+      },
+      {
+        "simbolo": "Sd, Sm",
+        "significado": "Extensiones hacia tipos aún más tardíos, casi sin bulbo. Sm son 'tipo Magallánico'."
+      },
+      {
+        "simbolo": "Irr",
+        "significado": "Irregular: sin simetría reconocible. Hubble las situó fuera del diapasón."
+      },
+      {
+        "simbolo": "pec",
+        "significado": "Peculiar: sufijo para objetos deformados por interacción o fusión."
+      }
     ]
   },
-
   "arbol_gz2": {
     "descripcion": "El cuestionario de Galaxy Zoo 2 es un árbol de decisión con 11 preguntas y 37 respuestas posibles. Cada pregunta se formula solo si la respuesta anterior lo justifica, así que las 37 respuestas no son independientes entre sí.",
     "formula": "La probabilidad de una hoja es el producto de las probabilidades condicionadas a lo largo de la rama recorrida.",
     "preguntas": [
-      {"id": "Q1", "texto": "¿Es lisa y redondeada, tiene alguna estructura o es una estrella/artefacto?",
-       "respuestas": ["Lisa", "Con estructura o disco", "Estrella o artefacto"],
-       "condicion": "Siempre se formula", "usada": true},
-      {"id": "Q2", "texto": "¿Podría ser un disco visto de canto?",
-       "respuestas": ["Sí", "No"], "condicion": "Solo si Q1 = con estructura", "usada": true},
-      {"id": "Q3", "texto": "¿Hay señales de una barra central?",
-       "respuestas": ["Sí", "No"], "condicion": "Solo si Q2 = no de canto", "usada": false},
-      {"id": "Q4", "texto": "¿Hay señales de un patrón espiral?",
-       "respuestas": ["Sí", "No"], "condicion": "Solo si Q2 = no de canto", "usada": true},
-      {"id": "Q5", "texto": "¿Qué tan prominente es el bulbo central?",
-       "respuestas": ["Ninguno", "Apenas visible", "Obvio", "Dominante"],
-       "condicion": "Solo si Q2 = no de canto", "usada": false},
-      {"id": "Q6", "texto": "¿Hay algo inusual?",
-       "respuestas": ["Sí", "No"], "condicion": "Siempre tras la rama principal", "usada": false},
-      {"id": "Q7", "texto": "¿Qué tan redondeada es?",
-       "respuestas": ["Completamente redonda", "Intermedia", "Tipo cigarro"],
-       "condicion": "Solo si Q1 = lisa", "usada": false},
-      {"id": "Q8", "texto": "¿Qué tipo de rasgo inusual?",
-       "respuestas": ["Anillo", "Arco o lente", "Perturbada", "Irregular", "Otro", "Fusión", "Estela de polvo"],
-       "condicion": "Solo si Q6 = sí", "usada": false},
-      {"id": "Q9", "texto": "¿Qué forma tiene el bulbo visto de canto?",
-       "respuestas": ["Redondeado", "Tipo caja", "Sin bulbo"],
-       "condicion": "Solo si Q2 = sí, de canto", "usada": false},
-      {"id": "Q10", "texto": "¿Qué tan enrollados están los brazos?",
-       "respuestas": ["Muy apretados", "Intermedios", "Abiertos"],
-       "condicion": "Solo si Q4 = sí", "usada": false},
-      {"id": "Q11", "texto": "¿Cuántos brazos espirales hay?",
-       "respuestas": ["1", "2", "3", "4", "Más de 4", "No se puede saber"],
-       "condicion": "Solo si Q4 = sí", "usada": false}
+      {
+        "id": "Q1",
+        "texto": "¿Es lisa y redondeada, tiene alguna estructura o es una estrella/artefacto?",
+        "respuestas": [
+          "Lisa",
+          "Con estructura o disco",
+          "Estrella o artefacto"
+        ],
+        "condicion": "Siempre se formula",
+        "usada": true
+      },
+      {
+        "id": "Q2",
+        "texto": "¿Podría ser un disco visto de canto?",
+        "respuestas": [
+          "Sí",
+          "No"
+        ],
+        "condicion": "Solo si Q1 = con estructura",
+        "usada": true
+      },
+      {
+        "id": "Q3",
+        "texto": "¿Hay señales de una barra central?",
+        "respuestas": [
+          "Sí",
+          "No"
+        ],
+        "condicion": "Solo si Q2 = no de canto",
+        "usada": false
+      },
+      {
+        "id": "Q4",
+        "texto": "¿Hay señales de un patrón espiral?",
+        "respuestas": [
+          "Sí",
+          "No"
+        ],
+        "condicion": "Solo si Q2 = no de canto",
+        "usada": true
+      },
+      {
+        "id": "Q5",
+        "texto": "¿Qué tan prominente es el bulbo central?",
+        "respuestas": [
+          "Ninguno",
+          "Apenas visible",
+          "Obvio",
+          "Dominante"
+        ],
+        "condicion": "Solo si Q2 = no de canto",
+        "usada": false
+      },
+      {
+        "id": "Q6",
+        "texto": "¿Hay algo inusual?",
+        "respuestas": [
+          "Sí",
+          "No"
+        ],
+        "condicion": "Siempre tras la rama principal",
+        "usada": false
+      },
+      {
+        "id": "Q7",
+        "texto": "¿Qué tan redondeada es?",
+        "respuestas": [
+          "Completamente redonda",
+          "Intermedia",
+          "Tipo cigarro"
+        ],
+        "condicion": "Solo si Q1 = lisa",
+        "usada": false
+      },
+      {
+        "id": "Q8",
+        "texto": "¿Qué tipo de rasgo inusual?",
+        "respuestas": [
+          "Anillo",
+          "Arco o lente",
+          "Perturbada",
+          "Irregular",
+          "Otro",
+          "Fusión",
+          "Estela de polvo"
+        ],
+        "condicion": "Solo si Q6 = sí",
+        "usada": false
+      },
+      {
+        "id": "Q9",
+        "texto": "¿Qué forma tiene el bulbo visto de canto?",
+        "respuestas": [
+          "Redondeado",
+          "Tipo caja",
+          "Sin bulbo"
+        ],
+        "condicion": "Solo si Q2 = sí, de canto",
+        "usada": false
+      },
+      {
+        "id": "Q10",
+        "texto": "¿Qué tan enrollados están los brazos?",
+        "respuestas": [
+          "Muy apretados",
+          "Intermedios",
+          "Abiertos"
+        ],
+        "condicion": "Solo si Q4 = sí",
+        "usada": false
+      },
+      {
+        "id": "Q11",
+        "texto": "¿Cuántos brazos espirales hay?",
+        "respuestas": [
+          "1",
+          "2",
+          "3",
+          "4",
+          "Más de 4",
+          "No se puede saber"
+        ],
+        "condicion": "Solo si Q4 = sí",
+        "usada": false
+      }
     ],
     "advertencia": "Q4 nunca se formula a los discos vistos de canto: el flujo salta a Q9, sobre la forma del bulbo. Ignorar esa condición hace que las galaxias de canto queden con probabilidad cercana a cero en Q4 y desaparezcan del conjunto de entrenamiento. En este proyecto ese error redujo la clase Disk de 19 597 a 145 objetos."
   },
-
   "metodologia": {
     "bandas": {
       "titulo": "Las bandas fotométricas g, r, i",
       "intro": "El SDSS observa el cielo a través de cinco filtros (u, g, r, i, z) que dejan pasar rangos concretos de longitud de onda. Cada imagen es una medida del flujo en ese rango, no una fotografía en color.",
       "detalle": [
-        {"banda": "u", "rango": "≈ 355 nm", "region": "Ultravioleta cercano", "uso": "Formación estelar muy reciente. Poco profunda y ruidosa."},
-        {"banda": "g", "rango": "≈ 470 nm", "region": "Azul-verde", "uso": "Sensible a estrellas jóvenes y masivas. Se asigna al canal AZUL."},
-        {"banda": "r", "rango": "≈ 620 nm", "region": "Rojo", "uso": "Banda de referencia para fotometría. Se asigna al canal VERDE."},
-        {"banda": "i", "rango": "≈ 750 nm", "region": "Infrarrojo cercano", "uso": "Traza la masa estelar vieja. Se asigna al canal ROJO."},
-        {"banda": "z", "rango": "≈ 890 nm", "region": "Infrarrojo", "uso": "Objetos muy enrojecidos o a alto desplazamiento al rojo."}
+        {
+          "banda": "u",
+          "rango": "≈ 355 nm",
+          "region": "Ultravioleta cercano",
+          "uso": "Formación estelar muy reciente. Poco profunda y ruidosa."
+        },
+        {
+          "banda": "g",
+          "rango": "≈ 470 nm",
+          "region": "Azul-verde",
+          "uso": "Sensible a estrellas jóvenes y masivas. Se asigna al canal AZUL."
+        },
+        {
+          "banda": "r",
+          "rango": "≈ 620 nm",
+          "region": "Rojo",
+          "uso": "Banda de referencia para fotometría. Se asigna al canal VERDE."
+        },
+        {
+          "banda": "i",
+          "rango": "≈ 750 nm",
+          "region": "Infrarrojo cercano",
+          "uso": "Traza la masa estelar vieja. Se asigna al canal ROJO."
+        },
+        {
+          "banda": "z",
+          "rango": "≈ 890 nm",
+          "region": "Infrarrojo",
+          "uso": "Objetos muy enrojecidos o a alto desplazamiento al rojo."
+        }
       ],
       "composicion": "La imagen RGB del conjunto de datos combina i→R, r→G, g→B. Una galaxia que se ve roja emite más en el infrarrojo cercano que en el azul: población estelar vieja. Una que se ve azul tiene formación estelar activa.",
       "consecuencia": "Por eso el color de la imagen no es decorativo: es una medida física de la población estelar dominante, y ese es exactamente el motivo de conservarlo en el preprocesamiento."
@@ -354,7 +533,6 @@
       "verificacion": "El KNN obtuvo F1-macro 0.7854 en validación cruzada y 0.7909 en el conjunto de prueba. Esa coincidencia es la señal de que no hay fuga."
     }
   },
-
   "metricas": {
     "accuracy": {
       "nombre": "Exactitud (accuracy)",
@@ -417,7 +595,6 @@
       "cuando_importa": "Es más informativa que el AUC-ROC cuando las clases están desbalanceadas, porque su línea base es la prevalencia real de la clase y no el 0.5 del azar."
     }
   },
-
   "como_leer": {
     "matriz_confusion": {
       "titulo": "Cómo leer una matriz de confusión",
@@ -452,5 +629,104 @@
       ],
       "cuidado": "Una curva PR sobre una clase con el 1 % de prevalencia empieza con línea base 0.01. Un AP de 0.4 en ese caso sería excelente, aunque el número parezca bajo en abstracto."
     }
-  }
+  },
+  "que_es_galaxia": {
+    "definicion": "Una galaxia es un sistema gravitacionalmente ligado formado por estrellas, gas, polvo y materia oscura. Los tamaños van desde unos pocos miles hasta cientos de miles de años luz, y el número de estrellas desde unos millones hasta más de un billón. La Vía Láctea contiene entre 100 000 y 400 000 millones de estrellas.",
+    "escala": "La galaxia grande más cercana, Andrómeda (M31), está a 2.5 millones de años luz. Se estima que el universo observable contiene del orden de dos billones de galaxias.",
+    "partes": [
+      {
+        "nombre": "Núcleo",
+        "texto": "La región más interna y densa. En la mayoría de las galaxias masivas alberga un agujero negro supermasivo, de millones a miles de millones de masas solares. El de la Vía Láctea, Sagitario A*, tiene unos 4 millones."
+      },
+      {
+        "nombre": "Bulbo",
+        "texto": "Concentración esferoidal de estrellas alrededor del núcleo, dominada por población vieja y roja. Su tamaño relativo al disco es lo que ordena la secuencia de Hubble."
+      },
+      {
+        "nombre": "Disco",
+        "texto": "Estructura plana en rotación donde se concentran el gas y el polvo. Es la región donde se forman estrellas nuevas. Su brillo decae de forma exponencial hacia afuera."
+      },
+      {
+        "nombre": "Brazos espirales",
+        "texto": "No son estructuras materiales fijas sino ondas de densidad que recorren el disco. Al atravesar el gas lo comprimen y desencadenan formación estelar, por eso se ven azules."
+      },
+      {
+        "nombre": "Halo",
+        "texto": "Envoltura esferoidal muy extendida que contiene cúmulos globulares, estrellas viejas dispersas y, sobre todo, materia oscura. Aunque es casi invisible en luz óptica, concentra la mayor parte de la masa total."
+      },
+      {
+        "nombre": "Cúmulos globulares",
+        "texto": "Agrupaciones esféricas de cientos de miles de estrellas muy viejas que orbitan el halo. La Vía Láctea tiene unos 150 conocidos y son de los objetos más antiguos del universo."
+      }
+    ],
+    "por_que_morfologia": "La forma de una galaxia no es un capricho: codifica su historia. Un disco fino y ordenado indica que no ha sufrido fusiones mayores recientes. Un elipsoide sin rotación coherente indica lo contrario. Clasificar morfologías a gran escala es, en el fondo, reconstruir la historia de ensamblaje del universo."
+  },
+  "galaxy_zoo": {
+    "titulo": "¿Qué es Galaxy Zoo?",
+    "que_es": "Galaxy Zoo es un proyecto de ciencia ciudadana lanzado en julio de 2007 que invita a cualquier persona a clasificar galaxias reales por su forma. Forma parte de la plataforma Zooniverse.",
+    "nasa": "Según la NASA, el Galaxy Zoo original reunió a un gran número de voluntarios con formación mínima que clasificaron visualmente más de 800 000 galaxias del Sloan Digital Sky Survey.",
+    "nasa_ia": "La misma fuente señala que los sistemas automáticos ya podían medir tamaño, forma, color y estructura básica, pero se les escapaban las sutilezas de las formas galácticas. Ese es exactamente el vacío que este trabajo intenta cerrar con redes neuronales.",
+    "fuente_nombre": "NASA Science — Hubble & Citizen Science",
+    "fuente_url": "https://science.nasa.gov/mission/hubble/science/citizen-science/",
+    "por_que_funciona": "El ojo humano reconoce patrones visuales complejos con muy poco entrenamiento. Al mostrar cada galaxia a decenas de voluntarios, el acuerdo entre ellos produce no solo una etiqueta sino una medida de confianza, que es justamente lo que este proyecto aprovecha para filtrar los casos ambiguos.",
+    "plataforma": "https://www.zooniverse.org/projects/zookeeper/galaxy-zoo/",
+    "datos": "https://data.galaxyzoo.org/"
+  },
+  "fuentes": [
+    {
+      "tipo": "Artículo",
+      "cita": "Lintott, C. J. et al. (2008). Galaxy Zoo: morphologies derived from visual inspection of galaxies from the Sloan Digital Sky Survey. MNRAS 389(3), 1179–1189.",
+      "url": "https://doi.org/10.1111/j.1365-2966.2008.13689.x"
+    },
+    {
+      "tipo": "Artículo",
+      "cita": "Banerji, M. et al. (2010). Galaxy Zoo: reproducing galaxy morphologies via machine learning. MNRAS 406(1), 342–353.",
+      "url": "https://doi.org/10.1111/j.1365-2966.2010.16713.x"
+    },
+    {
+      "tipo": "Artículo",
+      "cita": "Willett, K. W. et al. (2013). Galaxy Zoo 2: detailed morphological classifications for 304,122 galaxies from the Sloan Digital Sky Survey. MNRAS 435(4), 2835–2860.",
+      "url": "https://doi.org/10.1093/mnras/stt1458"
+    },
+    {
+      "tipo": "Artículo",
+      "cita": "Conselice, C. J. (2003). The relationship between stellar light distributions of galaxies and their formation histories. ApJS 147(1), 1–28.",
+      "url": "https://doi.org/10.1086/375001"
+    },
+    {
+      "tipo": "Artículo",
+      "cita": "Lupton, R. et al. (2004). Preparing red-green-blue images from CCD data. PASP 116(816), 133–137.",
+      "url": "https://doi.org/10.1086/382245"
+    },
+    {
+      "tipo": "Libro",
+      "cita": "Hubble, E. (1936). The Realm of the Nebulae. Yale University Press.",
+      "url": ""
+    },
+    {
+      "tipo": "Divulgación",
+      "cita": "NASA Science — Hubble & Citizen Science.",
+      "url": "https://science.nasa.gov/mission/hubble/science/citizen-science/"
+    },
+    {
+      "tipo": "Plataforma",
+      "cita": "Galaxy Zoo en Zooniverse.",
+      "url": "https://www.zooniverse.org/projects/zookeeper/galaxy-zoo/"
+    },
+    {
+      "tipo": "Datos",
+      "cita": "Galaxy Zoo Data Release.",
+      "url": "https://data.galaxyzoo.org/"
+    },
+    {
+      "tipo": "Datos",
+      "cita": "Sloan Digital Sky Survey — SkyServer.",
+      "url": "https://skyserver.sdss.org/"
+    },
+    {
+      "tipo": "Datos",
+      "cita": "Galaxy Zoo — The Galaxy Challenge (Kaggle), 61 578 galaxias.",
+      "url": "https://www.kaggle.com/c/galaxy-zoo-the-galaxy-challenge"
+    }
+  ]
 }

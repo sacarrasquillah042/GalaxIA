@@ -20,7 +20,7 @@ def metricas():
 
 @st.cache_data
 def contenido():
-    return json.loads((RAIZ / "GalaxIA" / "app" / "contenido" / "tipologias.json").read_text())
+    return json.loads((RAIZ / "app" / "contenido" / "tipologias.json").read_text())
 
 
 M = metricas()
@@ -28,7 +28,7 @@ C = contenido()
 
 # =========================== HERO ========================================== #
 st.markdown("<div style='height:8px'></div>", unsafe_allow_html=True)
-T.render_svg(V.svg_hero(), alto=400)
+V.render_svg(V.svg_hero(), alto=400)
 
 st.markdown(
     """<div class="gx-centro" style="margin-top:-14px">

@@ -406,3 +406,161 @@ def a_base64(arr) -> str:
     Image.fromarray(np.asarray(arr, dtype="uint8")).resize(
         (384, 384), Image.NEAREST).save(buf, format="PNG")
     return base64.b64encode(buf.getvalue()).decode()
+
+
+# --------------------------------------------------------------------------- #
+# Portada: galaxia interactiva
+# --------------------------------------------------------------------------- #
+def svg_hero() -> str:
+    """Galaxia espiral animada para la portada. Reacciona al puntero."""
+    import math
+    def brazo(fase, color, ancho, op):
+        pts = []
+        for k in range(90):
+            t = k / 89 * 3.9
+            r = 10 + t * 46
+            a = t * 1.45 + fase
+            pts.append(f"{300 + r*math.cos(a):.1f},{200 + r*0.42*math.sin(a):.1f}")
+        return (f'<polyline points="{" ".join(pts)}" fill="none" stroke="{color}" '
+                f'stroke-width="{ancho}" stroke-linecap="round" opacity="{op}"/>')
+
+    import random
+    rng = random.Random(11)
+    polvo = "".join(
+        f'<circle cx="{rng.uniform(60,540):.0f}" cy="{rng.uniform(60,340):.0f}" '
+        f'r="{rng.uniform(.6,1.9):.1f}" fill="#FFFFFF" opacity="{rng.uniform(.15,.75):.2f}">'
+        f'<animate attributeName="opacity" values="{rng.uniform(.1,.4):.2f};'
+        f'{rng.uniform(.5,.95):.2f};{rng.uniform(.1,.4):.2f}" '
+        f'dur="{rng.uniform(2.5,7):.1f}s" repeatCount="indefinite"/></circle>'
+        for _ in range(90))
+
+    return f"""
+<svg viewBox="0 0 600 400" width="100%" style="max-width:820px" id="hero">
+  <defs>
+    <radialGradient id="hn" cx="50%" cy="50%">
+      <stop offset="0%" stop-color="#FFF6E0"/>
+      <stop offset="22%" stop-color="#E0B050" stop-opacity="0.92"/>
+      <stop offset="60%" stop-color="#D9455F" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#7B4FBF" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="hh" cx="50%" cy="50%">
+      <stop offset="0%" stop-color="#7B4FBF" stop-opacity="0.40"/>
+      <stop offset="100%" stop-color="#7B4FBF" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="glow"><feGaussianBlur stdDeviation="3.2" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  </defs>
+  {polvo}
+  <ellipse cx="300" cy="200" rx="250" ry="150" fill="url(#hh)"/>
+  <g filter="url(#glow)">
+    <animateTransform attributeName="transform" type="rotate"
+      from="0 300 200" to="360 300 200" dur="46s" repeatCount="indefinite"/>
+    <ellipse cx="300" cy="200" rx="196" ry="86" fill="#4A7FD9" opacity="0.15"/>
+    {brazo(0, "#7FB2F0", 9, 0.80)}
+    {brazo(3.1416, "#7FB2F0", 9, 0.80)}
+    {brazo(0.42, "#B18CF0", 5.5, 0.55)}
+    {brazo(3.56, "#B18CF0", 5.5, 0.55)}
+    {brazo(1.05, "#F07B8C", 3.5, 0.32)}
+    {brazo(4.19, "#F07B8C", 3.5, 0.32)}
+  </g>
+  <ellipse cx="300" cy="200" rx="62" ry="44" fill="url(#hn)"/>
+</svg>
+<script>
+  // Paralaje suave: la galaxia sigue ligeramente al puntero
+  const h = document.getElementById('hero');
+  document.addEventListener('mousemove', e => {{
+    const x = (e.clientX / window.innerWidth - .5) * 16;
+    const y = (e.clientY / window.innerHeight - .5) * 10;
+    h.style.transform = `translate(${{x}}px, ${{y}}px) scale(1.02)`;
+    h.style.transition = 'transform .35s cubic-bezier(.22,.9,.3,1)';
+  }});
+</script>"""
+
+
+# --------------------------------------------------------------------------- #
+# Anatomía de una galaxia
+# --------------------------------------------------------------------------- #
+def svg_partes_galaxia() -> str:
+    """Diagrama anotado de las partes de una galaxia espiral."""
+    import math
+    def brazo(fase):
+        pts = []
+        for k in range(70):
+            t = k / 69 * 3.5
+            r = 12 + t * 34
+            a = t * 1.5 + fase
+            pts.append(f"{320 + r*math.cos(a):.1f},{190 + r*0.40*math.sin(a):.1f}")
+        return (f'<polyline points="{" ".join(pts)}" fill="none" stroke="#7FB2F0" '
+                f'stroke-width="8" stroke-linecap="round" opacity="0.85"/>')
+
+    def etiqueta(x, y, x2, y2, texto, color="#B18CF0"):
+        return (f'<line x1="{x}" y1="{y}" x2="{x2}" y2="{y2}" stroke="{color}" '
+                f'stroke-width="1.2" stroke-dasharray="3 3" opacity="0.8"/>'
+                f'<circle cx="{x2}" cy="{y2}" r="3.5" fill="{color}"/>'
+                f'<text x="{x}" y="{y}" fill="{color}" font-size="14" '
+                f'font-family="Inter,sans-serif" '
+                f'text-anchor="{"end" if x < 320 else "start"}">{texto}</text>')
+
+    return f"""
+<svg viewBox="0 0 640 380" width="100%" style="max-width:900px">
+  <defs>
+    <radialGradient id="pn"><stop offset="0%" stop-color="#FFF6E0"/>
+      <stop offset="45%" stop-color="#E0B050" stop-opacity="0.85"/>
+      <stop offset="100%" stop-color="#E0B050" stop-opacity="0"/></radialGradient>
+    <radialGradient id="ph"><stop offset="60%" stop-color="#7B4FBF" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#7B4FBF" stop-opacity="0.30"/></radialGradient>
+  </defs>
+  <ellipse cx="320" cy="190" rx="230" ry="150" fill="url(#ph)"/>
+  <ellipse cx="320" cy="190" rx="170" ry="70" fill="#4A7FD9" opacity="0.17"/>
+  {brazo(0)}{brazo(3.1416)}
+  <ellipse cx="320" cy="190" rx="52" ry="38" fill="url(#pn)"/>
+  <circle cx="320" cy="190" r="7" fill="#FFFFFF"/>
+
+  <circle cx="190" cy="92" r="4" fill="#E0B050" opacity="0.9"/>
+  <circle cx="452" cy="286" r="4" fill="#E0B050" opacity="0.9"/>
+  <circle cx="472" cy="104" r="3.4" fill="#E0B050" opacity="0.8"/>
+
+  {etiqueta(150, 196, 313, 190, "Núcleo")}
+  {etiqueta(150, 232, 296, 202, "Bulbo", "#E0B050")}
+  {etiqueta(506, 196, 430, 196, "Disco", "#7FB2F0")}
+  {etiqueta(506, 140, 398, 168, "Brazos espirales", "#7FB2F0")}
+  {etiqueta(506, 306, 452, 286, "Cúmulos globulares", "#E0B050")}
+  {etiqueta(150, 96, 190, 92, "Halo", "#B18CF0")}
+  <text x="320" y="366" fill="#A9A2C4" font-size="13" text-anchor="middle"
+        font-family="Inter,sans-serif">El halo, invisible en óptico, contiene la mayor parte de la masa: materia oscura</text>
+</svg>"""
+
+
+# --------------------------------------------------------------------------- #
+# Fila completa E0 - E7
+# --------------------------------------------------------------------------- #
+def svg_fila_elipticas() -> str:
+    """Las ocho clases de elíptica en una sola vista comparativa."""
+    piezas = []
+    for n in range(8):
+        b_a = 1 - n / 10
+        cx = 45 + n * 75
+        rx, ry = 32, 32 * b_a
+        piezas.append(f"""
+        <g>
+          <ellipse cx="{cx}" cy="80" rx="{rx}" ry="{ry:.1f}" fill="url(#fe)"/>
+          <text x="{cx}" y="140" fill="#E9E6F5" font-size="15" text-anchor="middle"
+                font-family="Inter,sans-serif" font-weight="700">E{n}</text>
+          <text x="{cx}" y="158" fill="#A9A2C4" font-size="12" text-anchor="middle"
+                font-family="Inter,sans-serif">b/a = {b_a:.1f}</text>
+        </g>""")
+    return f"""
+<svg viewBox="0 0 620 190" width="100%" style="max-width:900px">
+  <defs><radialGradient id="fe">
+    <stop offset="0%" stop-color="#FFF6E0"/>
+    <stop offset="45%" stop-color="#E0B050" stop-opacity="0.85"/>
+    <stop offset="100%" stop-color="#D9455F" stop-opacity="0"/>
+  </radialGradient></defs>
+  {"".join(piezas)}
+  <line x1="20" y1="176" x2="600" y2="176" stroke="#7B4FBF" stroke-width="1.5"
+        opacity="0.5" stroke-dasharray="4 4"/>
+  <text x="30" y="190" fill="#A9A2C4" font-size="12"
+        font-family="Inter,sans-serif">más redonda</text>
+  <text x="590" y="190" fill="#A9A2C4" font-size="12" text-anchor="end"
+        font-family="Inter,sans-serif">más aplanada &#8594; y aquí se acaba la secuencia</text>
+</svg>"""

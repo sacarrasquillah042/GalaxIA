@@ -11,7 +11,26 @@ aislado sin sanitización. Use siempre ``render_svg()`` de este módulo.
 """
 from __future__ import annotations
 
+from pathlib import Path
+
 import streamlit.components.v1 as components
+
+
+def raiz_proyecto(desde: str | Path | None = None) -> Path:
+    """
+    Localiza la raíz del proyecto subiendo hasta encontrar un marcador.
+
+    No se cuentan niveles de carpeta a propósito: contar es frágil, porque un
+    mismo archivo colocado en otra profundidad devuelve una raíz equivocada y
+    el fallo aparece lejos, como un fichero que no existe.
+    """
+    p = Path(desde or __file__).resolve()
+    for candidato in [p, *p.parents]:
+        if (candidato / "app" / "contenido").is_dir() and \
+           (candidato / "src" / "galaxia").is_dir():
+            return candidato
+    # Sin marcadores: dos niveles por encima de componentes/
+    return Path(__file__).resolve().parents[2]
 
 # --------------------------------------------------------------------------- #
 # Paleta galáctica
@@ -85,12 +104,27 @@ def css_global() -> str:
 }}
 {estrellas}
 
-/* ---------------- Tipografía ---------------- */
-html, body, .stApp, [class*="st-"] {{
+/* ---------------- Tipografía ----------------
+   IMPORTANTE: no ampliar la fuente con selectores amplios como
+   [class*="st-"] ni sobre .stApp. Los widgets de Streamlit tienen alturas
+   fijas calculadas para 14-15px; al agrandar el texto dentro de ellos, este
+   se desborda y se superpone. La ampliación se aplica SOLO al contenido. */
+html, body, .stApp {{
   font-family: 'Inter', system-ui, sans-serif;
 }}
-.stApp {{ font-size: 17.5px; line-height: 1.72; }}
-.stMarkdown p, .stMarkdown li {{ font-size: 17.5px; line-height: 1.75; }}
+[data-testid="stMarkdownContainer"] p,
+[data-testid="stMarkdownContainer"] li,
+.stMarkdown p, .stMarkdown li {{
+  font-size: 17.5px; line-height: 1.75;
+}}
+/* Los widgets conservan su escala nativa */
+[data-testid="stFileUploader"], [data-testid="stFileUploader"] *,
+[data-baseweb="select"], [data-baseweb="select"] *,
+[data-testid="stTopNav"], [data-testid="stTopNav"] *,
+[data-testid="stSelectbox"] *, [data-testid="stMultiSelect"] *,
+[data-testid="stSlider"] *, [data-testid="stNumberInput"] * {{
+  line-height: normal !important;
+}}
 h1 {{ font-family:'Fraunces',Georgia,serif !important; font-size: 3.0rem !important;
       letter-spacing:-.02em; font-weight:700 !important; }}
 h2 {{ font-family:'Fraunces',Georgia,serif !important; font-size: 2.1rem !important; }}
@@ -106,13 +140,45 @@ header[data-testid="stHeader"] {{
   backdrop-filter: blur(14px);
   border-bottom: 1px solid {P['borde']};
 }}
-[data-testid="stSidebarNav"], [data-testid="stSidebar"] {{ display: none !important; }}
+/* OJO: no ocultar [data-testid="stSidebar"]. Con position="top" Streamlit
+   monta ahí el logo y los enlaces de navegación, así que ocultarlo los borra. */
 
-/* Enlaces del menú superior */
-[data-testid="stTopNavLink"], [data-testid="stTopNav"] a {{
-  font-size: 16px !important; font-weight: 600 !important;
-  letter-spacing: .01em;
+/* Menú superior: una sola línea, sin solapamientos */
+[data-testid="stTopNav"] {{
+  display: flex !important; align-items: center !important;
+  gap: 4px; flex-wrap: nowrap; overflow-x: auto;
 }}
+[data-testid="stTopNavLink"], [data-testid="stTopNav"] a {{
+  font-size: 15px !important; font-weight: 600 !important;
+  white-space: nowrap !important; line-height: 1.2 !important;
+  padding: 7px 13px !important; border-radius: 9px;
+  display: inline-flex !important; align-items: center !important; gap: 7px;
+}}
+[data-testid="stTopNavLink"] p, [data-testid="stTopNav"] a p {{
+  margin: 0 !important; font-size: 15px !important; line-height: 1.2 !important;
+  white-space: nowrap !important;
+}}
+[data-testid="stTopNavLink"]:hover, [data-testid="stTopNav"] a:hover {{
+  background: rgba(123,79,191,.20) !important;
+}}
+[data-testid="stTopNavLink"][aria-current="page"],
+[data-testid="stTopNav"] a[aria-current="page"] {{
+  color: {P['morado_claro']} !important;
+}}
+
+/* El logo, bien visible y con espacio */
+[data-testid="stLogo"] {{
+  height: 42px !important; margin: 4px 10px 4px 4px;
+  transition: filter .3s ease, transform .3s ease;
+}}
+[data-testid="stLogo"]:hover {{
+  filter: drop-shadow(0 0 10px rgba(177,140,240,.7));
+  transform: scale(1.03);
+}}
+
+/* Botón de colapsar la barra lateral: innecesario con menú superior */
+[data-testid="stSidebarCollapseButton"],
+[data-testid="collapsedControl"] {{ display: none !important; }}
 
 /* ---------------- Aparición al hacer scroll ---------------- */
 .gx-reveal {{
@@ -196,10 +262,40 @@ header[data-testid="stHeader"] {{
 /* Pestañas más grandes */
 button[data-baseweb="tab"] {{ font-size: 17px !important; font-weight: 600 !important; }}
 
+/* Cargador de archivos: alturas propias, sin texto desbordado */
+[data-testid="stFileUploaderDropzone"] {{
+  background: rgba(123,79,191,.08) !important;
+  border: 1.5px dashed {P['borde']} !important;
+  border-radius: 14px !important;
+  padding: 20px 22px !important;
+  min-height: 96px !important;
+  align-items: center !important;
+}}
+[data-testid="stFileUploaderDropzoneInstructions"] {{
+  display: flex !important; flex-direction: column !important;
+  justify-content: center !important;
+}}
+[data-testid="stFileUploaderDropzoneInstructions"] span,
+[data-testid="stFileUploaderDropzoneInstructions"] small {{
+  font-size: 14px !important; line-height: 1.45 !important;
+}}
+[data-testid="stFileUploaderDropzone"] button {{
+  white-space: nowrap !important; font-size: 14px !important;
+  padding: 7px 16px !important; min-height: 38px !important;
+}}
+[data-testid="stFileUploaderFile"] {{ font-size: 14px !important; }}
+
 /* Botones */
-.stButton button {{
-  border-radius: 12px !important; font-size: 16px !important;
+.stButton button, .stDownloadButton button, .stLinkButton a {{
+  border-radius: 12px !important; font-size: 15.5px !important;
   font-weight: 600 !important; border: 1px solid {P['borde']} !important;
+  line-height: 1.3 !important; min-height: 42px !important;
+  padding: 9px 18px !important; white-space: nowrap;
+  display: inline-flex !important; align-items: center !important;
+  justify-content: center !important;
+}}
+.stButton button p, .stLinkButton a p {{
+  margin: 0 !important; font-size: 15.5px !important; line-height: 1.3 !important;
 }}
 .stButton button[kind="primary"] {{
   background: linear-gradient(120deg, {P['morado']}, {P['azul']}) !important;

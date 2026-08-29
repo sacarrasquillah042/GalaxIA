@@ -10,7 +10,7 @@ from componentes import graficos as G
 from componentes import tema as T
 from componentes import visual as V
 
-RAIZ = Path(__file__).resolve().parents[2]
+RAIZ = T.raiz_proyecto(__file__)
 T.aplicar_tema(st)
 
 

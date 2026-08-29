@@ -8,7 +8,7 @@ from componentes import graficos as G
 from componentes import tema as T
 from componentes import visual as V
 
-RAIZ = Path(__file__).resolve().parents[2]
+RAIZ = T.raiz_proyecto(__file__)
 T.aplicar_tema(st)
 
 
@@ -28,7 +28,7 @@ C = contenido()
 
 # =========================== HERO ========================================== #
 st.markdown("<div style='height:8px'></div>", unsafe_allow_html=True)
-V.render_svg(V.svg_hero(), alto=400)
+T.render_svg(V.svg_hero(), alto=400)
 
 st.markdown(
     """<div class="gx-centro" style="margin-top:-14px">
@@ -125,8 +125,26 @@ with ga:
         st.caption("Pase el cursor por cada barra para ver la exactitud. Se usa "
                    "F1-macro porque las clases están desbalanceadas.")
     else:
-        st.info("Ejecute `python scripts/export_artefactos.py` para ver los "
-                "resultados.")
+        ruta = RAIZ / "reports" / "metrics.json"
+        st.warning("**No se encontraron las métricas de los modelos.**")
+        st.markdown(
+            f"La aplicación busca el archivo en:\n\n`{ruta}`\n\n"
+            f"- Existe el archivo: **{'sí' if ruta.exists() else 'no'}**\n"
+            f"- Existe la carpeta `reports/`: "
+            f"**{'sí' if ruta.parent.exists() else 'no'}**\n"
+            f"- Raíz detectada del proyecto: `{RAIZ}`")
+        if ruta.exists():
+            st.info("El archivo existe, así que probablemente sea la caché de "
+                    "Streamlit, que guardó un resultado vacío de un arranque "
+                    "anterior. Pulse el botón para limpiarla.")
+        else:
+            st.info("Ejecute los notebooks 01–03 para generar "
+                    "`reports/metrics.json`, y después "
+                    "`python scripts/export_artefactos.py`.")
+        if st.button("Limpiar caché y recargar"):
+            st.cache_data.clear()
+            st.cache_resource.clear()
+            st.rerun()
 with gb:
     try:
         from galaxia import data, labels
@@ -137,8 +155,9 @@ with gb:
             df, umbral=umbral)["label_grouped"].value_counts().to_dict()
         st.plotly_chart(G.dona_clases(conteos), use_container_width=True)
         st.caption("Distribución tras filtrar por consenso de los voluntarios.")
-    except Exception:
-        st.empty()
+    except Exception as e:
+        st.caption(f"Distribución no disponible: {type(e).__name__}. "
+                   "Requiere `data/raw/training_solutions_rev1.csv`.")
 
 st.divider()
 

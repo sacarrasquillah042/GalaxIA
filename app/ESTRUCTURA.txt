@@ -1,0 +1,14 @@
+ATENCIÓN: dos archivos con nombre parecido, NO son intercambiables.
+
+  app/Inicio.py          <- ENRUTADOR. Define el menú superior y el logo.
+                            Es el que se pasa a `streamlit run`.
+
+  app/vistas/inicio.py   <- PORTADA. El contenido de la página de inicio.
+
+Copiar uno encima del otro produce un error confuso:
+  FileNotFoundError: .../Documentos/app/contenido/tipologias.json
+
+Si eso ocurre, vuelva a descomprimir la carpeta app/ completa.
+
+Comando correcto:
+  streamlit run app/Inicio.py

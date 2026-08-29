@@ -8,7 +8,7 @@ import streamlit as st
 from componentes import tema as T
 from componentes import visual as V
 
-RAIZ = Path(__file__).resolve().parents[2]
+RAIZ = T.raiz_proyecto(__file__)
 T.aplicar_tema(st)
 
 
@@ -46,7 +46,7 @@ with t1:
         unsafe_allow_html=True)
 
     st.markdown("#### Anatomía de una galaxia espiral")
-    T.render_svg(V.svg_partes_galaxia(), alto=400)
+    T.render_svg(V.svg_partes_galaxia(), alto=560)
 
     partes = Q["partes"]
     for fila in range(0, len(partes), 3):

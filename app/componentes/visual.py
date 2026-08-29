@@ -483,50 +483,58 @@ def svg_hero() -> str:
 def svg_partes_galaxia() -> str:
     """Diagrama anotado de las partes de una galaxia espiral."""
     import math
+
+    CX, CY = 400, 240
+
     def brazo(fase):
         pts = []
-        for k in range(70):
-            t = k / 69 * 3.5
-            r = 12 + t * 34
+        for k in range(80):
+            t = k / 79 * 3.5
+            r = 16 + t * 46
             a = t * 1.5 + fase
-            pts.append(f"{320 + r*math.cos(a):.1f},{190 + r*0.40*math.sin(a):.1f}")
+            pts.append(f"{CX + r*math.cos(a):.1f},{CY + r*0.40*math.sin(a):.1f}")
         return (f'<polyline points="{" ".join(pts)}" fill="none" stroke="#7FB2F0" '
-                f'stroke-width="8" stroke-linecap="round" opacity="0.85"/>')
+                f'stroke-width="11" stroke-linecap="round" opacity="0.85"/>')
 
     def etiqueta(x, y, x2, y2, texto, color="#B18CF0"):
-        return (f'<line x1="{x}" y1="{y}" x2="{x2}" y2="{y2}" stroke="{color}" '
-                f'stroke-width="1.2" stroke-dasharray="3 3" opacity="0.8"/>'
-                f'<circle cx="{x2}" cy="{y2}" r="3.5" fill="{color}"/>'
-                f'<text x="{x}" y="{y}" fill="{color}" font-size="14" '
-                f'font-family="Inter,sans-serif" '
-                f'text-anchor="{"end" if x < 320 else "start"}">{texto}</text>')
+        """x,y: posición del texto. x2,y2: punto señalado."""
+        anchor = "end" if x < CX else "start"
+        return (f'<line x1="{x + (8 if anchor == "end" else -8)}" y1="{y - 5}" '
+                f'x2="{x2}" y2="{y2}" stroke="{color}" stroke-width="1.3" '
+                f'stroke-dasharray="4 3" opacity="0.75"/>'
+                f'<circle cx="{x2}" cy="{y2}" r="4" fill="{color}"/>'
+                f'<text x="{x}" y="{y}" fill="{color}" font-size="17" '
+                f'font-weight="600" font-family="Inter,sans-serif" '
+                f'text-anchor="{anchor}">{texto}</text>')
 
     return f"""
-<svg viewBox="0 0 640 380" width="100%" style="max-width:900px">
+<svg viewBox="0 0 880 480" width="100%" style="max-width:1150px">
   <defs>
     <radialGradient id="pn"><stop offset="0%" stop-color="#FFF6E0"/>
       <stop offset="45%" stop-color="#E0B050" stop-opacity="0.85"/>
       <stop offset="100%" stop-color="#E0B050" stop-opacity="0"/></radialGradient>
-    <radialGradient id="ph"><stop offset="60%" stop-color="#7B4FBF" stop-opacity="0"/>
-      <stop offset="100%" stop-color="#7B4FBF" stop-opacity="0.30"/></radialGradient>
+    <radialGradient id="ph"><stop offset="55%" stop-color="#7B4FBF" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#7B4FBF" stop-opacity="0.32"/></radialGradient>
   </defs>
-  <ellipse cx="320" cy="190" rx="230" ry="150" fill="url(#ph)"/>
-  <ellipse cx="320" cy="190" rx="170" ry="70" fill="#4A7FD9" opacity="0.17"/>
+
+  <ellipse cx="{CX}" cy="{CY}" rx="290" ry="195" fill="url(#ph)"/>
+  <ellipse cx="{CX}" cy="{CY}" rx="222" ry="92" fill="#4A7FD9" opacity="0.17"/>
   {brazo(0)}{brazo(3.1416)}
-  <ellipse cx="320" cy="190" rx="52" ry="38" fill="url(#pn)"/>
-  <circle cx="320" cy="190" r="7" fill="#FFFFFF"/>
+  <ellipse cx="{CX}" cy="{CY}" rx="70" ry="51" fill="url(#pn)"/>
+  <circle cx="{CX}" cy="{CY}" r="10" fill="#FFFFFF"/>
 
-  <circle cx="190" cy="92" r="4" fill="#E0B050" opacity="0.9"/>
-  <circle cx="452" cy="286" r="4" fill="#E0B050" opacity="0.9"/>
-  <circle cx="472" cy="104" r="3.4" fill="#E0B050" opacity="0.8"/>
+  <circle cx="556" cy="352" r="5.5" fill="#E0B050" opacity="0.9"/>
+  <circle cx="300" cy="126" r="4.6" fill="#E0B050" opacity="0.8"/>
+  <circle cx="596" cy="138" r="4.2" fill="#E0B050" opacity="0.7"/>
 
-  {etiqueta(150, 196, 313, 190, "Núcleo")}
-  {etiqueta(150, 232, 296, 202, "Bulbo", "#E0B050")}
-  {etiqueta(506, 196, 430, 196, "Disco", "#7FB2F0")}
-  {etiqueta(506, 140, 398, 168, "Brazos espirales", "#7FB2F0")}
-  {etiqueta(506, 306, 452, 286, "Cúmulos globulares", "#E0B050")}
-  {etiqueta(150, 96, 190, 92, "Halo", "#B18CF0")}
-  <text x="320" y="366" fill="#A9A2C4" font-size="13" text-anchor="middle"
+  {etiqueta(210, 128, 248, 152, "Halo", "#B18CF0")}
+  {etiqueta(210, 250, 384, 240, "Núcleo")}
+  {etiqueta(210, 330, 356, 272, "Bulbo", "#E0B050")}
+  {etiqueta(640, 190, 508, 208, "Brazos espirales", "#7FB2F0")}
+  {etiqueta(640, 252, 556, 246, "Disco", "#7FB2F0")}
+  {etiqueta(640, 392, 556, 352, "Cúmulos globulares", "#E0B050")}
+
+  <text x="{CX}" y="462" fill="#A9A2C4" font-size="15" text-anchor="middle"
         font-family="Inter,sans-serif">El halo, invisible en óptico, contiene la mayor parte de la masa: materia oscura</text>
 </svg>"""
 

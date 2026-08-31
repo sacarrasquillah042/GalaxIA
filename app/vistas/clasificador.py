@@ -1,4 +1,5 @@
 """Clasificador: predicción, Grad-CAM y galaxias similares."""
+import json
 import os
 from pathlib import Path
 
@@ -15,9 +16,15 @@ RAIZ = T.raiz_proyecto(__file__)
 T.aplicar_tema(st)
 
 
+DIR_WEB = RAIZ / "app" / "assets" / "web"
+MODO_WEB = (DIR_WEB / "muestra.npz").exists()
+
+
 @st.cache_data
 def muestra():
-    p = RAIZ / "app" / "assets" / "muestra_test.npz"
+    """Modo web: paquete precalculado. Modo local: muestra_test.npz."""
+    p = (DIR_WEB / "muestra.npz") if MODO_WEB \
+        else (RAIZ / "app" / "assets" / "muestra_test.npz")
     if not p.exists():
         return None
     z = np.load(p, allow_pickle=True)
@@ -25,9 +32,25 @@ def muestra():
             "clases": [str(c) for c in z["clases"]]}
 
 
+@st.cache_data
+def precalculado():
+    """Predicciones, Grad-CAM y vecinos ya calculados (scripts/export_web.py)."""
+    if not MODO_WEB:
+        return None
+    d = {"pred": json.loads((DIR_WEB / "predicciones.json").read_text())}
+    for clave, archivo in [("gradcam", "gradcam.npz"), ("vecinos", "vecinos.npz")]:
+        p = DIR_WEB / archivo
+        d[clave] = dict(np.load(p, allow_pickle=True)) if p.exists() else None
+    return d
+
+
 @st.cache_resource
 def cnn():
-    import keras
+    """Carga la CNN solo si TensorFlow está instalado y el modelo existe."""
+    try:
+        import keras
+    except ImportError:
+        return None, None
     for n in ["cnn_224.keras", "cnn_128.keras"]:
         p = RAIZ / "models" / n
         if p.exists():
@@ -53,16 +76,20 @@ st.markdown("<div class='gx-centro'><h1>Clasificador</h1></div>",
             unsafe_allow_html=True)
 
 M = muestra()
+PRE = precalculado()
 modelo, nombre_modelo = cnn()
+
 if M is None:
-    st.error("Falta `app/assets/muestra_test.npz`. Ejecute "
-             "`python scripts/export_artefactos.py`.")
+    st.error("Faltan los datos de la muestra. Ejecute "
+             "`python scripts/export_artefactos.py` (local) o "
+             "`python scripts/export_web.py` (versión publicada).")
     st.stop()
-if modelo is None:
-    st.error("No se encontró ninguna CNN en `models/`.")
+if modelo is None and PRE is None:
+    st.error("No hay ni CNN ni paquete precalculado disponible.")
     st.stop()
 
 clases = M["clases"]
+SOLO_PRECALCULADO = modelo is None
 st.session_state.setdefault("idx", int(np.random.randint(len(M["ids"]))))
 st.session_state.setdefault("giro", 0)
 st.session_state.setdefault("propia", None)
@@ -102,9 +129,19 @@ with izq:
             unsafe_allow_html=True)
 
 with der:
-    proba = np.asarray(
-        modelo.predict(np.asarray(img, dtype=np.float32)[None, ...], verbose=0),
-        dtype=float)[0]
+    if modelo is not None:
+        proba = np.asarray(
+            modelo.predict(np.asarray(img, dtype=np.float32)[None, ...],
+                           verbose=0), dtype=float)[0]
+    elif not usando_propia:
+        proba = np.array(PRE["pred"]["modelos"]["CNN"][st.session_state.idx])
+    else:
+        st.warning(
+            "La versión publicada no puede clasificar imágenes nuevas: eso "
+            "requiere cargar el modelo completo, que no cabe en el servidor "
+            "gratuito. Las galaxias del catálogo sí funcionan, con las "
+            "predicciones ya calculadas.")
+        st.stop()
     pred = int(proba.argmax())
 
     st.markdown(
@@ -127,12 +164,17 @@ with der:
 
     st.markdown("#### ¿Dónde está mirando la red?")
     try:
-        from galaxia.explain import grad_cam, superponer
-        mapa, _, _ = grad_cam(modelo, img, clase=pred)
+        if modelo is not None:
+            from galaxia.explain import grad_cam, superponer
+            mapa, _, _ = grad_cam(modelo, img, clase=pred)
+            overlay = superponer(np.asarray(img, dtype=np.uint8), mapa)
+        elif PRE and PRE.get("gradcam") is not None and not usando_propia:
+            overlay = PRE["gradcam"]["G"][st.session_state.idx]
+        else:
+            raise RuntimeError("no disponible para imágenes nuevas")
         a, b = st.columns(2)
         a.image(img, caption="Original", use_container_width=True)
-        b.image(superponer(np.asarray(img, dtype=np.uint8), mapa),
-                caption="Atención de la red (Grad-CAM)",
+        b.image(overlay, caption="Atención de la red (Grad-CAM)",
                 use_container_width=True)
         st.caption("Las zonas cálidas son las que más influyen en la decisión. "
                    "Si la red se fijara en el fondo, el resultado no sería "
@@ -140,8 +182,19 @@ with der:
     except Exception as e:
         st.info(f"Grad-CAM no disponible: {e}")
 
-K = knn()
-if K is not None:
+K = knn() if modelo is not None else None
+if K is None and PRE and PRE.get("vecinos") is not None and not usando_propia:
+    st.divider()
+    st.markdown("#### Galaxias similares")
+    st.caption("Vecinos más cercanos en el espacio de componentes principales: "
+               "objetos reales que se parecen al consultado.")
+    Vn = PRE["vecinos"]
+    cl_v = [str(c) for c in Vn["clases"]]
+    i_ = st.session_state.idx
+    for col, j in zip(st.columns(5), range(5)):
+        col.image(Vn["V"][i_][j], use_container_width=True)
+        col.caption(f"{cl_v[int(Vn['y'][i_][j])]} · `{int(Vn['ids'][i_][j])}`")
+elif K is not None:
     st.divider()
     st.markdown("#### Galaxias similares")
     st.caption("Vecinos más cercanos en el espacio de componentes principales: "
@@ -160,7 +213,13 @@ if K is not None:
         st.info(f"Vecinos no disponibles: {e}")
 
 st.divider()
-st.markdown("#### ¿Quiere clasificar una imagen propia?")
+if SOLO_PRECALCULADO:
+    st.info("**¿Quiere clasificar sus propias imágenes?** Esta versión "
+            "publicada usa predicciones precalculadas para caber en el "
+            "servidor gratuito. Descargue el proyecto completo para ejecutar "
+            "el modelo en su equipo.")
+else:
+    st.markdown("#### ¿Quiere clasificar una imagen propia?")
 cu = st.columns([1, 3, 1])
 with cu[1]:
     st.caption("Se recorta al centro y se redimensiona igual que las del "

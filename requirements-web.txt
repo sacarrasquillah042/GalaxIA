@@ -1,0 +1,7 @@
+# Dependencias de la versión PUBLICADA. Sin TensorFlow: la app web usa
+# predicciones precalculadas por scripts/export_web.py.
+numpy>=1.26,<2.2
+pandas>=2.2
+plotly>=5.22
+streamlit>=1.40
+pillow>=10.4

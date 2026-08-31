@@ -1,0 +1,15 @@
+{
+  "conteos": {
+    "Smooth": 8132,
+    "Spiral": 6824,
+    "Disk": 2604
+  },
+  "n_total": 61578,
+  "n_limpio": 17560,
+  "umbral": 0.8,
+  "clases": [
+    "Disk",
+    "Smooth",
+    "Spiral"
+  ]
+}

@@ -4,7 +4,27 @@ __pycache__/
 data/raw/
 data/processed/*.npy
 data/processed/*.npz
-models/*.keras
-models/*.pkl
 .ipynb_checkpoints/
 !data/processed/splits.json
+app/assets/_svg/
+
+# --- Publicación web ---
+# El paquete precalculado SÍ se versiona: es lo que hace desplegable la app.
+!app/assets/web/
+!app/assets/web/*
+# Nunca subir el caché de imágenes ni el dataset
+data/processed/images_*.npy
+data/raw/
+
+# --- Modelos entrenados: nunca al repositorio ---
+# Regla por carpeta, no por extension: renombrar models/ a models_off/ para
+# probar el modo web hacia que las reglas antiguas dejaran de aplicarse.
+models/
+models_*/
+*.keras
+*.pkl
+*.joblib
+
+# Artefactos locales pesados (la version web usa app/assets/web/)
+app/assets/muestra_test.npz
+app/assets/_svg/

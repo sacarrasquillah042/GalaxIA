@@ -146,18 +146,27 @@ with ga:
             st.cache_resource.clear()
             st.rerun()
 with gb:
-    try:
-        from galaxia import data, labels
-        df = labels.construir_etiquetas(data.cargar_csv())
-        u = data.DIR_PROC / "umbral.json"
-        umbral = json.loads(u.read_text())["umbral"] if u.exists() else 0.6
-        conteos = labels.filtrar_por_confianza(
-            df, umbral=umbral)["label_grouped"].value_counts().to_dict()
+    conteos = None
+    # 1) Paquete web precalculado (no requiere el CSV original)
+    res = RAIZ / "app" / "assets" / "web" / "resumen.json"
+    if res.exists():
+        conteos = json.loads(res.read_text())["conteos"]
+    else:
+        # 2) Cálculo local desde el CSV de Kaggle
+        try:
+            from galaxia import data, labels
+            df = labels.construir_etiquetas(data.cargar_csv())
+            u = data.DIR_PROC / "umbral.json"
+            umbral = json.loads(u.read_text())["umbral"] if u.exists() else 0.6
+            conteos = labels.filtrar_por_confianza(
+                df, umbral=umbral)["label_grouped"].value_counts().to_dict()
+        except Exception as e:
+            st.caption(f"Distribución no disponible: {type(e).__name__}. "
+                       "Ejecute `scripts/export_web.py` o coloque el CSV en "
+                       "`data/raw/`.")
+    if conteos:
         st.plotly_chart(G.dona_clases(conteos), use_container_width=True)
         st.caption("Distribución tras filtrar por consenso de los voluntarios.")
-    except Exception as e:
-        st.caption(f"Distribución no disponible: {type(e).__name__}. "
-                   "Requiere `data/raw/training_solutions_rev1.csv`.")
 
 st.divider()
 

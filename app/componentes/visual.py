@@ -195,7 +195,7 @@ def svg_diapason(resaltar: str | None = None) -> str:
         </g>"""
 
     return _wrap(f"""
-<svg viewBox="0 0 620 260" width="100%" style="max-width:820px">
+<svg viewBox="0 0 620 260" width="100%" style="max-width:1250px">
   <rect width="620" height="260" fill="#0B0E17" rx="8"/>
   <path d="M 150 130 L 250 130" stroke="#5F6978" stroke-width="2"/>
   <path d="M 250 130 Q 300 130 330 78" stroke="#5F6978" stroke-width="2" fill="none"/>
@@ -239,7 +239,7 @@ def svg_arbol_gz2(activa: str | None = None) -> str:
         </g>"""
 
     return _wrap(f"""
-<svg viewBox="0 0 640 330" width="100%" style="max-width:860px">
+<svg viewBox="0 0 640 330" width="100%" style="max-width:1150px">
   <rect width="640" height="330" fill="#0B0E17" rx="8"/>
   <g stroke="#4A5A78" stroke-width="1.4" fill="none">
     <path d="M 130 60 L 175 40"/><path d="M 130 70 L 175 110"/><path d="M 130 80 L 175 285"/>
@@ -297,8 +297,8 @@ def svg_recorte() -> str:
 def html_asinh() -> str:
     """Comparación visual lineal vs asinh."""
     return """
-<div style="display:flex;gap:14px;flex-wrap:wrap;justify-content:center">
-  <svg viewBox="0 0 250 190" width="240">
+<div style="display:flex;gap:26px;flex-wrap:wrap;justify-content:center">
+  <svg viewBox="0 0 250 190" width="400">
     <rect width="250" height="190" fill="#0B0E17" rx="8"/>
     <line x1="30" y1="160" x2="230" y2="160" stroke="#5F6978"/>
     <line x1="30" y1="160" x2="30" y2="20" stroke="#5F6978"/>
@@ -308,7 +308,7 @@ def html_asinh() -> str:
     <text x="130" y="16" fill="#4A90D9" font-size="12" text-anchor="middle"
           font-family="sans-serif">Escala lineal</text>
   </svg>
-  <svg viewBox="0 0 250 190" width="240">
+  <svg viewBox="0 0 250 190" width="400">
     <rect width="250" height="190" fill="#0B0E17" rx="8"/>
     <line x1="30" y1="160" x2="230" y2="160" stroke="#5F6978"/>
     <line x1="30" y1="160" x2="30" y2="20" stroke="#5F6978"/>
@@ -343,7 +343,7 @@ def svg_bandas() -> str:
         for b, l, c, a in bandas
     )
     return _wrap(f"""
-<svg viewBox="0 0 620 220" width="100%" style="max-width:820px">
+<svg viewBox="0 0 620 220" width="100%" style="max-width:1250px">
   <rect width="620" height="220" fill="#0B0E17" rx="8"/>
   {curvas}
   <line x1="40" y1="175" x2="590" y2="175" stroke="#5F6978" stroke-width="1.2"/>
@@ -508,7 +508,7 @@ def svg_partes_galaxia() -> str:
                 f'text-anchor="{anchor}">{texto}</text>')
 
     return f"""
-<svg viewBox="0 0 880 480" width="100%" style="max-width:1150px">
+<svg viewBox="0 0 880 480" width="100%" style="max-width:1450px">
   <defs>
     <radialGradient id="pn"><stop offset="0%" stop-color="#FFF6E0"/>
       <stop offset="45%" stop-color="#E0B050" stop-opacity="0.85"/>
@@ -558,7 +558,7 @@ def svg_fila_elipticas() -> str:
                 font-family="Inter,sans-serif">b/a = {b_a:.1f}</text>
         </g>""")
     return f"""
-<svg viewBox="0 0 620 190" width="100%" style="max-width:900px">
+<svg viewBox="0 0 620 190" width="100%" style="max-width:1300px">
   <defs><radialGradient id="fe">
     <stop offset="0%" stop-color="#FFF6E0"/>
     <stop offset="45%" stop-color="#E0B050" stop-opacity="0.85"/>

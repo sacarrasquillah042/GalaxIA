@@ -228,7 +228,7 @@ with t4:
     B = MT["bandas"]
     st.markdown("#### ① Las bandas fotométricas g, r, i")
     st.write(B["intro"])
-    T.render_svg(V.svg_bandas(), alto=250)
+    T.render_svg(V.svg_bandas(), alto=440)
     st.dataframe(
         pd.DataFrame(B["detalle"]).rename(columns={
             "banda": "Banda", "rango": "Longitud de onda", "region": "Región",
@@ -251,7 +251,7 @@ with t4:
                    unsafe_allow_html=True)
     st.latex(r"v = \frac{\operatorname{asinh}(f/\beta)}"
              r"{\operatorname{asinh}(1/\beta)}")
-    T.render_svg(V.html_asinh(), alto=210)
+    T.render_svg(V.html_asinh(), alto=340, estirar=False)
     st.write(A["ventaja"])
     st.warning(A["consecuencia"])
 

@@ -364,7 +364,7 @@ def aplicar_tema(st) -> None:
 _DIR_SVG = None
 
 
-def render_svg(svg: str, alto: int = 280) -> None:
+def render_svg(svg: str, alto: int = 280, estirar: bool = True) -> None:
     """
     Renderiza SVG animado dentro de un iframe.
 
@@ -377,11 +377,27 @@ def render_svg(svg: str, alto: int = 280) -> None:
     como obsoleta pero sigue funcionando: el aviso en consola es inofensivo.
     """
     global _DIR_SVG
+
+    # estirar=False para composiciones con varios SVG (p. ej. el panel doble
+    # del estiramiento asinh), donde forzar el 100 % rompería el diseño.
+    estilo_estirar = """
+      body > svg, body > div > svg {
+        width:100% !important; height:100% !important;
+        max-width:none !important; max-height:none !important;
+      }
+      body > div { width:100%; height:100%;
+                   display:flex; align-items:center; justify-content:center; }
+    """ if estirar else "svg{max-width:100%;max-height:100%}"
+    # El SVG debe ESTIRARSE hasta llenar el iframe. Con `max-width` conserva
+    # su tamaño natural y aumentar la altura del iframe solo genera espacio
+    # vacío alrededor. Por eso se anula cualquier max-width en línea y se
+    # fuerza width/height al 100 %.
     doc = f"""<!DOCTYPE html><html><head><meta charset="utf-8"><style>
       html,body{{margin:0;padding:0;background:transparent;overflow:hidden;
+                 height:100%;width:100%;
                  display:flex;align-items:center;justify-content:center;
-                 height:100%;font-family:Inter,system-ui,sans-serif}}
-      svg{{max-width:100%;max-height:100%}}
+                 font-family:Inter,system-ui,sans-serif}}
+      {estilo_estirar}
     </style></head><body>{svg}</body></html>"""
 
     try:

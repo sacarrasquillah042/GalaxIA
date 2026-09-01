@@ -46,7 +46,7 @@ with t1:
         unsafe_allow_html=True)
 
     st.markdown("#### Anatomía de una galaxia espiral")
-    T.render_svg(V.svg_partes_galaxia(), alto=560)
+    T.render_svg(V.svg_partes_galaxia(), alto=660)
 
     partes = Q["partes"]
     for fila in range(0, len(partes), 3):
@@ -214,7 +214,7 @@ with t4:
         res = st.radio("Resaltar", ["(todos)"] + tipos, horizontal=True,
                        label_visibility="collapsed")
         st.markdown("</div>", unsafe_allow_html=True)
-    T.render_svg(V.svg_diapason(None if res == "(todos)" else res), alto=300)
+    T.render_svg(V.svg_diapason(None if res == "(todos)" else res), alto=520)
     st.warning(f"**Un malentendido persistente.** {H['malentendido']}")
 
     st.markdown("<div style='height:26px'></div>", unsafe_allow_html=True)
@@ -224,7 +224,7 @@ with t4:
     st.markdown(
         "<div class='gx-centro'><h4>El número de E0 a E7 mide el aplanamiento"
         "</h4></div>", unsafe_allow_html=True)
-    T.render_svg(V.svg_fila_elipticas(), alto=230)
+    T.render_svg(V.svg_fila_elipticas(), alto=400)
 
     ce = st.columns(3)
     ce[0].markdown(T.tarjeta(
@@ -294,7 +294,7 @@ with t5:
             break
 
     if img_arbol:
-        ci = st.columns([1, 6, 1])
+        ci = st.columns([1, 12, 1])
         ci[1].image(str(img_arbol), use_container_width=True)
         st.caption(
             "Árbol de decisión del cuestionario de Galaxy Zoo 2. "
@@ -303,13 +303,17 @@ with t5:
             "Digital Sky Survey*, MNRAS 435(4), 2835–2860. "
             "https://doi.org/10.1093/mnras/stt1458")
     else:
-        st.info(
-            "**Espacio reservado para la figura del artículo.** Guarde la "
-            "imagen del árbol de decisión como `app/assets/arbol_gz2.png` y "
-            "aparecerá aquí automáticamente, con la cita de Willett et al. "
-            "(2013). Mientras tanto se muestra el esquema simplificado de las "
-            "tres preguntas que usa este trabajo.")
-        T.render_svg(V.svg_arbol_gz2(None), alto=340)
+        st.warning(
+            "**Falta la figura del árbol de decisión.**\n\n"
+            "Guarde la imagen en la carpeta `app/assets/` con uno de estos "
+            "nombres y aparecerá aquí automáticamente, ya con la cita de "
+            "Willett et al. (2013):\n\n"
+            "- `app/assets/arbol_gz2.png`  ← recomendado\n"
+            "- `app/assets/arbol_gz2.jpg`\n"
+            "- `app/assets/gz2_tree.png`\n\n"
+            "Mientras tanto se muestra el esquema simplificado de las tres "
+            "preguntas que usa este trabajo.")
+        T.render_svg(V.svg_arbol_gz2(None), alto=600)
 
     st.markdown("<div style='height:20px'></div>", unsafe_allow_html=True)
 

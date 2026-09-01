@@ -46,9 +46,6 @@ st.markdown(
         <span style="font-size:16px">IX Congreso Colombiano de Astronomía
         y Astrofísica — COCOA 2026</span>
       </div>
-      <div style="margin-top:34px;color:#7A7396;font-size:14px;
-                  letter-spacing:.18em;text-transform:uppercase">
-        desplácese para continuar</div>
     </div>""",
     unsafe_allow_html=True,
 )

@@ -118,28 +118,7 @@ with t2:
         st.markdown(T.tarjeta("Sobre las barras centrales", info["extra_barras"]),
                     unsafe_allow_html=True)
 
-    # ---- Galería ----------------------------------------------------------
-    st.markdown("#### Ejemplos reales del SDSS")
-    entradas = G.get(elegida, [])
-    if not entradas:
-        st.warning("Ejecute `python scripts/export_artefactos.py` para generar "
-                   "la galería.")
-    else:
-        st.caption(f"{len(entradas)} galaxias con el consenso más claro entre "
-                   "los voluntarios de Galaxy Zoo.")
-        base = RAIZ / "app" / "assets" / "galeria"
-        for ini in range(0, len(entradas), 6):
-            cols = st.columns(6)
-            for col, e in zip(cols, entradas[ini:ini + 6]):
-                r = base / e["archivo"]
-                if r.exists():
-                    col.image(str(r), use_container_width=True)
-                    et = f"conf. {e['confianza']:.2f}"
-                    if e.get("edge_on"):
-                        et += " · de canto"
-                    col.caption(et)
-        st.caption("Crédito: Sloan Digital Sky Survey (SDSS), bandas g, r, i — "
-                   "subconjunto público del Galaxy Zoo Challenge.")
+  
 
 # =========================================================================== #
 with t3:
